@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class = 'well'>
+
+    <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Sign in to Reminder</h2>
+        <input type="email" class="form-control" placeholder="Username" required="" autofocus="">
+        <input type="password" class="form-control" placeholder="Password" required="">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+</div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+{% endblock %}
+
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="" method="post">
+        <p>
+            <label for = "email">Username </label>  
+            <input type="text" name="email" label = "Email">
+        </p><p>
+            <label for = "Password">Password</label>  
+            <input type="password" name="password" label = "Password">
+        </p><p>   
+            {% csrf_token %}
+ 
+            <input type="submit" value="Log In">
+        </p>
+    </form>

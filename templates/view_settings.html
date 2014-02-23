@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p></p>
+<p></p>
+<p></p>
+  <div class = 'well'>
+  <h4>Your Stocks </h4>
+    {% if latest_user_stocks_list %}
+            {% for user_stocks in latest_user_stocks_list %} 
+               <p>{{ user_stocks.stock }}   ${{ user_stocks.price}}</p>
+    		
+            {% endfor %}    
+            <a href="/edit_stocks">Edit Stocks</a>
+    		
+    {% else %}
+    	<div>
+    		<a href="/edit_stocks"><button type="button" class="btn btn-primary">Add Stocks</button></a>
+    	</div>
+    {% endif %}
+</div>
+
+
+<div class = "well well-sm">
+  <h4>Your Settings</h4>
+    {% if latest_user_data_list %}
+            {% for user_data in latest_user_data_list %} 
+               <p>Zip Code: {{ user_data.zip_code }}</p>
+               <p>Phone Number {{ user_data.phone_number }}</p>
+            {% endfor %}    
+    {% endif %}
+    <a href="/edit_user_data">Edit Info</a>
+
+</div>
+
+{% endblock %}

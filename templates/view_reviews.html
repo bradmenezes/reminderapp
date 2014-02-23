@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Welcome to Yelp, here are some reviews</h3>
+
+{% if latest_review_list %}
+        {% for review in latest_review_list %} 
+           <p>Title: {{ review.title }}</p>
+           <p>By: {{ review.user }}</p>
+           <p></p>
+           <p> {{ review.review }}</p>
+ 
+        {% endfor %}    
+
+{% endif %}
+
+{% endblock %}

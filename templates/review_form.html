@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Write a Review</title>
+</head>
+<body>
+    <h1>Write a review</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    
+      <form action="" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Post review">
+    </form>
+
+    <p>By posting this review you agree to our Terms of Service and Privacy Policy</p>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Stock Chart</title>
+    <script src="Chart.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <h1>Stock Chart</h1>
+    <div id="container" style="width:100%; height:400px;"></div>
+
+	<script type = 'text/javascript'>    
+	 	caty = [];
+		daty = [];
+		var keys = {{keys_as_json|safe}};
+		var values = {{values_as_json|safe}};
+		var stock_symbol = '{{stock_symbol}}';
+
+	$(function () { 
+		 $('#container').highcharts({
+		        chart: {
+		            type: 'line'
+		        },
+		        title: {
+		            text: 'Stock Chart'
+		        },
+		        xAxis: {
+		            categories: keys
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Stock Price'
+		            }
+		        },
+		        series: [{
+		            name: stock_symbol,
+		            data: values
+		        }]
+		    });
+		   
+
+		});
+
+	</script>
+
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-# Django settings for the project.
+# Django settings for the project locally only!
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'newdb',                      # Or path to database file if using sqlite3.
+        'NAME': 'postgres',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'postgres',
         'PASSWORD': '',
@@ -110,6 +110,7 @@ ROOT_URLCONF = 'reminderapp.urls'
 WSGI_APPLICATION = 'reminderapp.wsgi.application'
 
 TEMPLATE_DIRS = (
+    '/Users/administrator/Dropbox/djangobrad/reminderapp/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -126,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'reminderapp',
 )
 
 # A sample logging configuration. The only tangible logging

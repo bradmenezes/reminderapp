@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Message sent to Brad's Phone</title>
+</head>
+<body>
+    <h1>Message sent to Brad's Phone</h1>
+
+        <p style="color: green;">Congrats, message sent! '{{ sms_text }}'</p>
+
+    <form action="" method="post">
+	    <label for = "sms_text">Enter your message to Brad</label> <p></p> 
+	    <textarea name="sms_text"></textarea>
+	   	{% csrf_token %}
+	    <p><input type="submit" value="Send SMS"></p>
+	</form>
+
+</body>
+</html>

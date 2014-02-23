@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Send Message to Brad's Phone</title>
+</head>
+<body>
+    <h1>Send Message to Brad's Phone</h1>
+
+    {%if sms_text%}
+        <p style="color: green;">{{ sms_text }}</p>
+    {%endif%}
+
+    <form action="" method="post">
+	    <label for = "sms_text">Enter your message to Brad</label> <p></p> 
+	    <textarea name="sms_text"></textarea>
+	   	{% csrf_token %}
+	    <p><input type="submit" value="Send SMS"></p>
+	</form>
+
+</body>
+</html>

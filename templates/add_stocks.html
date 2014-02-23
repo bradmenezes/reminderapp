@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class = 'page-header'>
+	<h3>Your Stocks</h3>
+</div>
+
+<div class = 'well'>
+
+  <form class = "form-inline" action="" method="post">
+		{% csrf_token %}
+		{{ form.stock }}
+  
+		<button type="submit button" class="btn btn-primary">Add Stock</button> 
+</form>
+    {% if latest_user_stocks_list %}
+            {% for user_stocks in latest_user_stocks_list %} 
+               <p>{{ user_stocks.stock }}   ${{ user_stocks.price}}
+    			<a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a>
+    		</p>
+            {% endfor %}    
+    	
+    {% endif %}
+</div>
+
+{% endblock %}

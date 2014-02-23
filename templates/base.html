@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html lang="en">
+	<head>
+	    <title>{% block title %}{% endblock %}</title>
+	    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	</head>
+	<body>
+	    <div class="container">
+	
+		    <ul class="nav nav-tabs">
+			  	<li class="active"><a href="/reviews">Home</a></li>
+			  	<li><a href="/writeareview">Write a Review</a></li>
+			  	<li><a href="/user_settings">Settings</a></li>
+				<li><a href="/send_message">Send Message</a></li>
+				{% if user.is_authenticated %}
+					<li><a href="/logout">Logout</a></li>
+					<li><a>Hello, {{user.username}}</a></li>
+				{% endif %}
+
+			</ul>
+	    {% block content %}{% endblock %}
+	    {% block footer %}
+	    
+	    <div class="panel panel-default">
+  			<div class="panel-body">
+    			
+  			</div>
+  			<div class="panel-footer">
+  				<a href = /admin>Admin link </a>
+  			</div>
+			</div>
+	</div>
+	    {% endblock %}
+	</body>
+</html>
