@@ -5,7 +5,7 @@ try:
 except ImportError: 
     pass
 
-DEBUG = True   
+DEBUG = False   
 
 # heroku db settings
 import dj_database_url
