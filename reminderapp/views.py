@@ -7,19 +7,7 @@ from django.contrib.auth.decorators import login_required
 from forms import *
 from reminderapp.models import *
 from django.template import RequestContext
-#import ystockquote
-
-def write_a_review(request):
-	form = ReviewCreationForm(request.POST or None)
-
-	if request.method == 'POST':
-		if form.is_valid():
-			new_review = form.save(commit = False)
-			new_review.user = request.user 
-			new_review.save()
-			return HttpResponseRedirect ('/reviews')
-	return render (request, 'write_a_review.html', {'form': form},)
-	#return render (request, 'write_a_review.html', {'form': form}, context_instance=RequestContext(request))
+import ystockquote
 
 def edit_stocks(request):
 	form = StocksForm(request.POST or None)
@@ -41,10 +29,6 @@ def edit_stocks(request):
 	return render (request, 'add_stocks.html', {'form': form, 'latest_user_stocks_list': latest_user_stocks_list},)
 		#return render (request, 'write_a_review.html', {'form': form}, context_instance=RequestContext(request))
 
-
-def view_reviews(request):
-	latest_review_list = Review.objects.all().order_by('rating')
-	return render(request, 'view_reviews.html', {'latest_review_list': latest_review_list})
 
 def user_data(request):
 	form = KeyUserDataForm(request.POST or None)

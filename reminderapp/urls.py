@@ -18,3 +18,5 @@ urlpatterns = patterns('',
     url(r'^send_message/$', views.send_message),
 )
 
+
+
