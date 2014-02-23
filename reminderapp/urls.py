@@ -10,8 +10,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'reminderapp.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^writeareview/$', views.write_a_review),
-    url(r'^reviews/$', views.view_reviews),
     url(r'^user_data/$', views.user_data),
     url(r'^user_settings/$', views.view_user_info),
     url(r'^edit_stocks/$', views.edit_stocks),
@@ -19,3 +17,4 @@ urlpatterns = patterns('',
     url(r'^edit_user_data/$', views.edit_user_data),
     url(r'^send_message/$', views.send_message),
 )
+

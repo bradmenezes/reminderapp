@@ -1,4 +1,4 @@
-# Django settings for the project.
+# Django settings for the project for prod only. 
 
 try:
     from base_settings import *
