@@ -1,11 +1,12 @@
 # Django settings for the project.
 
 try:
-    from settings_local import *
+    from base_settings import *
 except ImportError: 
     pass
 
-DEBUG = False   
+DEBUG = True   
+TEMPLATE_DEBUG = DEBUG
 
 # heroku db settings
 import dj_database_url
