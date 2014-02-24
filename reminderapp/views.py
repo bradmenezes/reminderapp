@@ -101,13 +101,13 @@ def getting_stocks(request, stocks_list):
 	return message
 
 def get_weather(request, zip_code):
-    import pywapi
+    #import pywapi
     today = datetime.date.today()
     
     #Get weather from Yahoo Weather API
-    weather = pywapi.get_weather_from_yahoo(zip_code)
+    #weather = pywapi.get_weather_from_yahoo(zip_code)
 
-    #Grab the temperature, high, low, description from the response
+    #Grab the temperature, high, low, dsescription from the response
     temperature = weather['condition']['temp']
     high = weather['forecasts'][0]['high']
     low = weather['forecasts'][0]['low']
@@ -120,12 +120,13 @@ def get_weather(request, zip_code):
 def send_message(request):
 	
 	zip_code = KeyUserData.objects.all().get(user = request.user).zip_code
-	weather_text = get_weather(request, zip_code)
+	#weather_text = get_weather(request, zip_code)
 	
 	stocks_list = list(Stocks.objects.all().filter(user = request.user))
 	stock_text = getting_stocks(request, stocks_list)
 
-	message = str(weather_text) + '\n' + str(stock_text)
+	# add str(weather_text) when you figure out pywapi 
+	message = '\n' + str(stock_text)
 	print type(message)
 
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
