@@ -101,7 +101,7 @@ def getting_stocks(request, stocks_list):
 	return message
 
 def get_weather(request, zip_code):
-    import pywapi
+    #import pywapi
     today = datetime.date.today()
     
     #Get weather from Yahoo Weather API
