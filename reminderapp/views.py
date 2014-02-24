@@ -8,6 +8,7 @@ from forms import *
 from reminderapp.models import *
 from django.template import RequestContext
 import ystockquote
+import datetime
 
 def edit_stocks(request):
 	form = StocksForm(request.POST or None)
@@ -48,7 +49,6 @@ def user(request):
 
 def view_user_info(request):
 	AuthUser = request.user
-	print 'Hey Brad'
 	latest_user_data_list = KeyUserData.objects.all().filter(user = AuthUser)
 	latest_user_stocks_list = Stocks.objects.all().filter(user = AuthUser)
 
@@ -57,8 +57,6 @@ def view_user_info(request):
 	for stock in latest_user_stocks_list:
 		stock.price = round(float(ystockquote.get_price(stock.stock)),2)
 		stock.stock = (stock.stock).upper()
-
-		print stock.price
 			
 	return render(request,
 		'view_settings.html',
@@ -102,6 +100,23 @@ def getting_stocks(request, stocks_list):
 	print message
 	return message
 
+def get_weather(request, zip_code):
+    import pywapi
+    today = datetime.date.today()
+    
+    #Get weather from Yahoo Weather API
+    weather = pywapi.get_weather_from_yahoo(zip_code)
+
+    #Grab the temperature, high, low, description from the response
+    temperature = weather['condition']['temp']
+    high = weather['forecasts'][0]['high']
+    low = weather['forecasts'][0]['low']
+    description = weather['forecasts'][0]['text']
+    
+    #Save the SMS text as a string
+    text = str(today) + '\n \n' + str(temperature) + ' and ' + str(description) + '\nfrom ' + str(high) + ' to ' + str(low) + '\n'
+    return(text)
+
 def send_message(request):
 	
 	zip_code = KeyUserData.objects.all().get(user = request.user).zip_code
@@ -110,9 +125,30 @@ def send_message(request):
 	stocks_list = list(Stocks.objects.all().filter(user = request.user))
 	stock_text = getting_stocks(request, stocks_list)
 
-	message = weather_text + '\n' + stock_text
-	phone_number = KeyUserData.objects.all().get(user = request.user).phone_number
-	print phone_number
+	message = str(weather_text) + '\n' + str(stock_text)
+	print type(message)
+
+	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
+	print type(phone_number)
 	phone_sms (request, message, phone_number)
 	
-	return HttpResponseRedirect('/reviews')
+	return HttpResponseRedirect('/user_data')
+
+def phone_sms(request, text, number):
+
+    from twilio.rest import TwilioRestClient
+    
+    # Your Account Sid and Auth Token from twilio.com/user/account
+    account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
+    auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
+    client = TwilioRestClient(account_sid, auth_token)
+    
+    #if request.method == 'POST':
+        #sms_text = request.POST.get('sms_text', '')
+    sms_text = text
+    
+    message = client.sms.messages.create(
+        body=sms_text,
+        to=number,    # Brad's Phone number
+        from_="+16502674790")
+
