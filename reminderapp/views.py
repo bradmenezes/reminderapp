@@ -10,6 +10,7 @@ from django.template import RequestContext
 import ystockquote
 import datetime
 
+@login_required (login_url = '/login')
 def edit_stocks(request):
 	form = StocksForm(request.POST or None)
 	AuthUser = request.user
@@ -31,22 +32,31 @@ def edit_stocks(request):
 		#return render (request, 'write_a_review.html', {'form': form}, context_instance=RequestContext(request))
 
 
-def user_data(request):
-	form = KeyUserDataForm(request.POST or None)
+@login_required (login_url = '/login')
+def edit_user_data(request):
 	
+	try:
+		print 'user_id' + str(request.user.pk)
+		user_data_to_edit = KeyUserData.objects.get(user = request.user)
+		print 'user_data_to_edit:' + str(user_data_to_edit)
+		form = KeyUserDataForm(request.POST or None, instance = user_data_to_edit)
+	except KeyUserData.DoesNotExist:
+		form = KeyUserDataForm(request.POST or None)
+
 	if request.method == 'POST':
 		if form.is_valid():
 			new_user_data = form.save(commit = False)
 			new_user_data.user = request.user
 			new_user_data.save()
 			print form
-			return HttpResponseRedirect ('/reviews')
+			return HttpResponseRedirect ('/')
 	
 	return render (request, 'user_data.html', {'form': form})
 
 def user(request):
 	return {'user': request.user}
 
+@login_required (login_url = '/login')
 def view_user_info(request):
 	AuthUser = request.user.pk
 	latest_user_data_list = KeyUserData.objects.all().filter(user = AuthUser)
@@ -64,31 +74,10 @@ def view_user_info(request):
 		'latest_user_stocks_list': latest_user_stocks_list},
 	  	)
 
+@login_required (login_url = '/login')
 def delete_stock(request, stock_id):
 	Stocks.objects.get(pk = stock_id).delete()
 	return HttpResponseRedirect('/edit_stocks')
-
-def edit_user_data(request):
-	
-	#Using try/except here since row may not exist yet
-	try:
-		user_data_to_edit = KeyUserData.objects.get(user = request.user)
-		print 'exists!'
-	except KeyUserData.DoesNotExist:
-		print 'DoesNotExist'
-		user_data_to_edit = None
-		form = KeyUserDataForm(request.POST or None)
-		form.user = request.user 
- 	
-	form = KeyUserDataForm(request.POST or None, instance = user_data_to_edit)
-
-
-	if request.method == 'POST':
-		if form.is_valid():
-			changed_book = form.save()
-			changed_book.save()
-	        return HttpResponseRedirect('/user_settings')
-	return render(request, 'user_data.html', {'form': form})
 
 def getting_stocks(request, stocks_list):
 	stock_prices = {}
@@ -117,6 +106,7 @@ def get_weather(request, zip_code):
     text = str(today) + '\n \n' + str(temperature) + ' and ' + str(description) + '\nfrom ' + str(high) + ' to ' + str(low) + '\n'
     return(text)
 
+@login_required (login_url = '/login')
 def send_message(request):
 	
 	zip_code = KeyUserData.objects.all().get(user = request.user).zip_code
@@ -133,7 +123,7 @@ def send_message(request):
 	print type(phone_number)
 	phone_sms (request, message, phone_number)
 	
-	return HttpResponseRedirect('/user_data')
+	return HttpResponseRedirect('/')
 
 def phone_sms(request, text, number):
 

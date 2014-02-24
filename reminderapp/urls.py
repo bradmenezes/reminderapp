@@ -13,13 +13,15 @@ urlpatterns = patterns('',
     #url(r'^user_data/$', views.user_data),
     url(r'^$', views.view_user_info), 
     url(r'^admin/', include(admin.site.urls)),
+    
     url(r'^signup/', auth.signup), 
-    url(r'^login/', auth.login), 
+    url(r'^login/', auth.login_user), 
     url(r'^logout/', auth.logout), 
+    
     url(r'^user_settings/$', views.view_user_info),
+    url(r'^edit_data/$', views.edit_user_data),    
     url(r'^edit_stocks/$', views.edit_stocks),
     url(r'^delete_stocks/(\d{1,2})/$', views.delete_stock),
-    url(r'^edit_user_data/$', views.edit_user_data),
     url(r'^send_message/$', views.send_message),
 )
 
