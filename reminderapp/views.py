@@ -48,7 +48,7 @@ def user(request):
 	return {'user': request.user}
 
 def view_user_info(request):
-	AuthUser = request.user
+	AuthUser = request.user.pk
 	latest_user_data_list = KeyUserData.objects.all().filter(user = AuthUser)
 	latest_user_stocks_list = Stocks.objects.all().filter(user = AuthUser)
 
