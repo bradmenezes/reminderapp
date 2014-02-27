@@ -36,9 +36,7 @@ def edit_stocks(request):
 def edit_user_data(request):
 	
 	try:
-		print 'user_id' + str(request.user.pk)
 		user_data_to_edit = KeyUserData.objects.get(user = request.user)
-		print 'user_data_to_edit:' + str(user_data_to_edit)
 		form = KeyUserDataForm(request.POST or None, instance = user_data_to_edit)
 	except KeyUserData.DoesNotExist:
 		form = KeyUserDataForm(request.POST or None)
@@ -48,7 +46,6 @@ def edit_user_data(request):
 			new_user_data = form.save(commit = False)
 			new_user_data.user = request.user
 			new_user_data.save()
-			print form
 			return HttpResponseRedirect ('/')
 	
 	return render (request, 'user_data.html', {'form': form})
