@@ -20,10 +20,10 @@ def timed_job():
         #sms_text = request.POST.get('sms_text', '')
     sms_text = a
     print 'hey Brad!'
-    message = client.sms.messages.create(
-        body=sms_text,
-        to="+14155279628",    # Brad's Phone number
-        from_="+16502674790")
+    # message = client.sms.messages.create(
+    #     body=sms_text,
+    #     to="+14155279628",    # Brad's Phone number
+    #     from_="+16502674790")
 
 sched.start()
 
