@@ -1,5 +1,7 @@
 from apscheduler.scheduler import Scheduler
 #from /reminderapp import views
+import logging
+logging.basicConfig()
 
 sched = Scheduler()
 
@@ -17,7 +19,7 @@ def timed_job():
     #if request.method == 'POST':
         #sms_text = request.POST.get('sms_text', '')
     sms_text = a
-    
+    print 'hey Brad!'
     message = client.sms.messages.create(
         body=sms_text,
         to=+"+14155279628",    # Brad's Phone number
