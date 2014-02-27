@@ -3,7 +3,7 @@ from apscheduler.scheduler import Scheduler
 
 sched = Scheduler()
 
-@sched.inteexitrval_schedule(minutes=1)
+@sched.interval_schedule(minutes=1)
 def timed_job():
     a = 'testing 1,2,3...'
     print a
