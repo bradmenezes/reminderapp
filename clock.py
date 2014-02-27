@@ -20,7 +20,7 @@ def timed_job():
     
     message = client.sms.messages.create(
         body=sms_text,
-        to=+"14155279628",    # Brad's Phone number
+        to=+"+14155279628",    # Brad's Phone number
         from_="+16502674790")
 
 sched.start()
