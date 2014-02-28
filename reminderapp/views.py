@@ -122,8 +122,9 @@ def send_message(request):
 	
 	return HttpResponseRedirect('/')
 
-def phone_sms(request, text, number):
-
+#def phone_sms(request, text, number):
+def phone_sms(text, number):
+	
     from twilio.rest import TwilioRestClient
     
     # Your Account Sid and Auth Token from twilio.com/user/account
