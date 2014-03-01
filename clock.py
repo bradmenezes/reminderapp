@@ -1,5 +1,5 @@
 from apscheduler.scheduler import Scheduler
-from /reminderapp import views
+from reminderapp import views
 import logging
 logging.basicConfig()
 
@@ -10,21 +10,23 @@ account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
 auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
 client = TwilioRestClient(account_sid, auth_token)
 
-@sched.cron_schedule(day_of_week='fri', hour=9, minute=50)
+@sched.cron_schedule(day_of_week='sat', hour=14, minute=32)
 def scheduled_job():
+    print 'sat at 2 30 - day of week sat'
     message = client.sms.messages.create(
-    body='Fri at 9 50',
+    body='sat at 2 30',
     to=phone_number,    # Brad's Phone number
     from_="+16502674790")
 
-@sched.cron_schedule(day_of_week='mon-fri', hour=10, minute=5)
+@sched.cron_schedule(day_of_week='mon-fri', hour=14, minute=32)
 def scheduled_job():
+    print 'sat at 2 30 - day of week mon-fri'
     message = client.sms.messages.create(
     body='Leave for work, 10:05',
     to=phone_number,    # Brad's Phone number
     from_="+16502674790")
 
-@sched.cron_schedule(day_of_week='sat-sun', hour=10, minute=00)
+@sched.cron_schedule(day_of_week='sat-sun', hour=14, minute=32)
 def scheduled_job():
     message = client.sms.messages.create(
     body='Go to the gym on the weekend, boss',

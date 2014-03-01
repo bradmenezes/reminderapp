@@ -16,10 +16,10 @@ class Command(BaseCommand):
         auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
         client = TwilioRestClient(account_sid, auth_token)
 
-        @sched.cron_schedule(day_of_week='fri', hour=0, minute=52)
+        @sched.cron_schedule(day_of_week='sat',hour=14, minute=27)
         def scheduled_job():
             message = client.sms.messages.create(
-            body='Fri at 9 50',
+            body='sat at 2 27',
             to=phone_number,    # Brad's Phone number
             from_="+16502674790")
 
@@ -30,7 +30,7 @@ class Command(BaseCommand):
             to=phone_number,    # Brad's Phone number
             from_="+16502674790")
 
-        @sched.cron_schedule(day_of_week='sat-sun', hour=10, minute=00)
+        @sched.cron_schedule(day_of_week='sat-sun', hour=14, minute=27)
         def scheduled_job():
             message = client.sms.messages.create(
             body='Go to the gym on the weekend, boss',
