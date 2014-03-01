@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from apscheduler.scheduler import Scheduler
-#from reminderapp import views
+from reminderapp import views
 import logging
 from reminderapp.models import *
 
