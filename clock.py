@@ -1,13 +1,13 @@
 from apscheduler.scheduler import Scheduler
 from reminderapp import views
-from django.core.management import setup_environ
-from reminderapp import settings
-setup_environ(settings)
-
+from reminderapp.models import *
 import logging
 logging.basicConfig()
 
 sched = Scheduler()
+
+user = list(AuthUser.objects.all())
+print user
 
 from twilio.rest import TwilioRestClient
 account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
