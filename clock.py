@@ -1,5 +1,9 @@
 from apscheduler.scheduler import Scheduler
 from reminderapp import views
+from django.core.management import setup_environ
+from reminderapp import settings
+setup_environ(settings)
+
 import logging
 logging.basicConfig()
 
