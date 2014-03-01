@@ -10,6 +10,8 @@ account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
 auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
 client = TwilioRestClient(account_sid, auth_token)
 
+phone_number = '+14155279628'
+
 @sched.interval_schedule(minutes=1)
 def timed_job():
 	print 'This job is run every three minutes.'
