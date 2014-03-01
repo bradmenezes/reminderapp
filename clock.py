@@ -10,6 +10,14 @@ account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
 auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
 client = TwilioRestClient(account_sid, auth_token)
 
+@sched.interval_schedule(minutes=1)
+def timed_job():
+	print 'This job is run every three minutes.'
+	message = client.sms.messages.create(
+    body='sat at 2 30',
+    to=phone_number,    # Brad's Phone number
+    from_="+16502674790")
+
 @sched.cron_schedule(day_of_week='sat', hour=14, minute=32)
 def scheduled_job():
     print 'sat at 2 30 - day of week sat'
