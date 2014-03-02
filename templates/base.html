@@ -11,6 +11,7 @@
 		    <ul class="nav nav-tabs">
 			  	<li class="active"><a href="/">Home</a></li>
 				<li><a href="/send_message">Send Message</a></li>
+				<li><a href="/set_schedule">Schedule</a></li>
 				{% if user.is_authenticated %}
 					<li><a href="/logout">Logout</a></li>
 					<li><a>Hello, {{user.username}}</a></li>

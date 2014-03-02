@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'reminderapp',
     'authentication',
     'scheduler',
+    'datetime',
 )
 
 # A sample logging configuration. The only tangible logging

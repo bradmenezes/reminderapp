@@ -1,3 +1,5 @@
+#Models for Scheduler App
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from reminderapp.models import TimeStampedModel
@@ -31,27 +33,6 @@ class Schedule(TimeStampedModel):
 			]
 		)
 	
-	# frequency_to_day = {
-	# 	'DAILY': 'mon-sun',
-	# 	'WEEKLY': 'weekly',
-	# 	'WEEKENDS': 'sat-sun',
-	# 	'WEEKDAYS': 'mon-fri',
-	# }
-
-	# def save(self):
-	# 	if not self.id:
-	# 		for freq, day in frequency_to_day:
-	# 			if freq == self.frequency:
-	# 				if frequency == 'WEEKLY':
-	# 					self.day_of_week = self.start_date.ctime().lower().partition(' ')[0]
-	# 				else: 
-	# 					self.day_of_week = day
-	# 	super(Schedule, self).save()
-
-
-					
-
-					
 
 
 

@@ -5,6 +5,8 @@ admin.autodiscover()
 from reminderapp import views
 from authentication import views_authentication as auth
 from django.contrib.auth.views import login, logout
+from scheduler import views_scheduler as scheduler
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -23,6 +25,10 @@ urlpatterns = patterns('',
     url(r'^edit_stocks/$', views.edit_stocks),
     url(r'^delete_stocks/(\d{1,2})/$', views.delete_stock),
     url(r'^send_message/$', views.send_message),
+
+    url(r'^set_schedule/$', scheduler.set_schedule),
+
+
 )
 
 
