@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from reminderapp.models import *
+from scheduler.models import *
 
 #from reviews.models import Review, Business, User_data
 
@@ -12,3 +13,8 @@ class KeyUserDataAdmin(admin.ModelAdmin):
 
 admin.site.register(KeyUserData, KeyUserDataAdmin)
 admin.site.register(Stocks, StocksAdmin)
+
+class ScheduleAdmin(admin.ModelAdmin):
+	list_display = ('user', 'message', 'created_on', 'modified_date', 'frequency', 'day_of_week', 'start_date', 'hour', 'minute')
+
+admin.site.register(Schedule, ScheduleAdmin)

@@ -1,6 +1,6 @@
 from apscheduler.scheduler import Scheduler
 #from reminderapp import views
-from reminderapp.models import *
+#from reminderapp.models import *
 import logging
 logging.basicConfig()
 
