@@ -123,7 +123,7 @@ def send_message(request):
 	return HttpResponseRedirect('/')
 
 #def phone_sms(request, text, number):
-def phone_sms(text, number):
+def phone_sms(request, text, number):
 
     from twilio.rest import TwilioRestClient
     
@@ -135,8 +135,8 @@ def phone_sms(text, number):
     #if request.method == 'POST':
         #sms_text = request.POST.get('sms_text', '')
     sms_text = text
-    
-    message = client.sms.messages.create(
+    #message = 
+    client.sms.messages.create(
         body=sms_text,
         to=number,    # Brad's Phone number
         from_="+16502674790")
