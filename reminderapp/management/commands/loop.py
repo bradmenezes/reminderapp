@@ -13,6 +13,7 @@ logging.basicConfig()
 class Command(BaseCommand):
     
     def start_scheduled_job(self, sched, user_message, phone_number, day_of_week, hour, minute):
+        
         def send_message():
             print 'AFTER' + str(user_message) + str(phone_number)
             client.sms.messages.create(
