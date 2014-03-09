@@ -27,16 +27,19 @@ class Command(BaseCommand):
         sched = Scheduler()
         user_list = list(AuthUser.objects.all())
         for user in user_list:
-            user_schedule = Schedule.objects.all().filter(user=user)
-            phone_number = str(KeyUserData.objects.all().get(user=user).phone_number)
-            for schedule in user_schedule:
-                day_of_week = schedule.day_of_week
-                hour = schedule.hour
-                minute = schedule.minute
-                user_message = schedule.message
-                
-                self.start_scheduled_job(sched, user_message, phone_number, day_of_week, hour, minute)
-        
+            try:
+                user_schedule = Schedule.objects.all().get(user=user)
+                phone_number = str(KeyUserData.objects.all().get(user=user).phone_number)
+                for schedule in user_schedule:
+                    day_of_week = schedule.day_of_week
+                    hour = schedule.hour
+                    minute = schedule.minute
+                    user_message = schedule.message
+                    
+                    self.start_scheduled_job(sched, user_message, phone_number, day_of_week, hour, minute)
+            except Schedule.DoesNotExist or KeyUserData.DoesNotExist:
+                print 'hey'
+
         sched.start()
         while True:
             pass
