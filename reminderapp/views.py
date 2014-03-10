@@ -9,6 +9,7 @@ from reminderapp.models import *
 from django.template import RequestContext
 import ystockquote
 import datetime
+from scheduler.models import *
 
 @login_required (login_url = '/login')
 def edit_stocks(request):
@@ -64,11 +65,14 @@ def view_user_info(request):
 	for stock in latest_user_stocks_list:
 		stock.price = round(float(ystockquote.get_price(stock.stock)),2)
 		stock.stock = (stock.stock).upper()
-			
+	
+	latest_schedules = Schedule.objects.all().filter(user=request.user)
+
 	return render(request,
 		'view_settings.html',
 		{'latest_user_data_list': latest_user_data_list, 
-		'latest_user_stocks_list': latest_user_stocks_list},
+		'latest_user_stocks_list': latest_user_stocks_list,
+		'latest_schedules': latest_schedules},
 	  	)
 
 @login_required (login_url = '/login')

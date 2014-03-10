@@ -4,6 +4,28 @@
 <p></p>
 <p></p>
 <p></p>
+  {% if latest_schedules %}
+
+<div class = "well well-sm">
+  <h4>Your Scheduled Messages</h4>
+
+  {% for schedule in latest_schedules %}
+    <div> 
+      <span>As of {{schedule.start_date }},</span>
+      <span>send me the message '{{schedule.message }}'</span>
+      <span> {{schedule.frequency}}</span>
+      <span> at {{schedule.hour}}:</span>
+      <span>{{schedule.minute}}</span>
+    </div>
+  {% endfor %}
+      <a href="/set_schedule">Edit Schedules</a>
+
+</div>
+
+{% endif %}
+
+
+
   <div class = 'well'>
   <h4>Your Stocks </h4>
     {% if latest_user_stocks_list %}
@@ -31,6 +53,11 @@
     {% endif %}
     <a href="/edit_data">Edit Info</a>
 
+
 </div>
+
+
+
+
 
 {% endblock %}
