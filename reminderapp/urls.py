@@ -9,10 +9,7 @@ from scheduler import views_scheduler as scheduler
 
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'reminderapp.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    #url(r'^user_data/$', views.user_data),
+
     url(r'^$', views.view_user_info), 
     url(r'^admin/', include(admin.site.urls)),
     
@@ -27,8 +24,8 @@ urlpatterns = patterns('',
     url(r'^send_message/$', views.send_message),
 
     url(r'^set_schedule/$', scheduler.set_schedule),
-    url(r'^delete_schedule/(\d{1,2})/$', scheduler.delete_schedule),
-
+    url(r'^delete_schedule/', scheduler.delete_schedule),
+    url(r'^sms_schedule/(\d{1,2})/$', scheduler.sms_schedule),
 
 )
 

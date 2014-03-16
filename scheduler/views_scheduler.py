@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import authenticate, login
 from scheduler.models import *
 from scheduler.forms_scheduler import *
+from reminderapp.views import *
+
 
 def set_schedule(request):
 	form = SchedulerForm(request.POST or None)
@@ -42,16 +44,17 @@ def set_schedule(request):
 # 	# need to figure out how to grab pk from url
 # 	# then same as edit_user_data
 
-
 @login_required(login_url = '/login')
 def delete_schedule(request, schedule_id):
 	Schedule.objects.get(pk = schedule_id).delete()
 	return HttpResponseRedirect('/')
 
+def sms_schedule(request, schedule_id):
+	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
+	message = str(Schedule.objects.get(pk = schedule_id).message)
 
-
-
-
+	phone_sms(request, message, phone_number)
+	return HttpResponseRedirect('/set_schedule')
 
 
 
