@@ -32,8 +32,42 @@ def set_schedule(request):
 			return HttpResponseRedirect('/set_schedule')
 
 	latest_schedule = Schedule.objects.all().filter(user=request.user)
-	print latest_schedule
+	print latest_schedule	
 
 	return render (request, 'set_schedule.html', {'form': form, 'latest_schedule': latest_schedule},)
+
+# @login_required(login_url = '/login')
+# def edit_schedule(request):
+	
+# 	# need to figure out how to grab pk from url
+# 	# then same as edit_user_data
+
+
+@login_required(login_url = '/login')
+def delete_schedule(request, schedule_id):
+	Schedule.objects.get(pk = schedule_id).delete()
+	return HttpResponseRedirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	

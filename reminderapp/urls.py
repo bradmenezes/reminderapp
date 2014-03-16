@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^send_message/$', views.send_message),
 
     url(r'^set_schedule/$', scheduler.set_schedule),
+    url(r'^delete_schedule/(\d{1,2})/$', scheduler.delete_schedule),
 
 
 )

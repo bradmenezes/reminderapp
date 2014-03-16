@@ -17,6 +17,10 @@
 			<span> {{schedule.frequency}}</span>
 			<span> at {{schedule.hour}}:</span>
 			<span>{{schedule.minute}}</span>
+			<span><a href="/delete_schedule/{{ schedule.id }}">Remove</a>
+
+
+
 		</div>
 	{% endfor %}
 {% endif %}

@@ -1,12 +1,19 @@
-{% block title %}{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-  <h1>Create an account Brad</h1>
 
-  <form action="" method="post">
+<div class = 'well'>
+
+
+  <h1>Create an account for Reminder App</h1>
+
+  <form class = "form-inline" action="" method="post">
       {{ form.as_p }}
 
       {% csrf_token %}
       <input type="submit" value="Signup">
   </form>
+
+
+</div>
 {% endblock %}
