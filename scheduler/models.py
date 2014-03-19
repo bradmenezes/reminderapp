@@ -42,8 +42,15 @@ class Schedule(TimeStampedModel):
 		(5, '5 am'),
 	)
 
+	MESSSAGE_CHOICES = (
+		('Custom', 'Custom'),
+		('Stocks', 'Stocks'),
+		('Weather', 'Weather'),
+	)
+
+	#message_type = models.CharField(max_length= 20, choices = MESSSAGE_CHOICES)
 	user = models.ForeignKey(AuthUser)
-	message = models.TextField(max_length = 160,)
+	message = models.TextField(max_length = 160)
 	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'WEEKLY', max_length = 10)
 	day_of_week = models.CharField(max_length = 10)
 	start_date = models.DateField()

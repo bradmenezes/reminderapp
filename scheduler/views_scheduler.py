@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from scheduler.models import *
 from scheduler.forms_scheduler import *
 from reminderapp.views import *
+from django.core.mail import send_mail
 
 
 def set_schedule(request):
@@ -49,6 +50,7 @@ def delete_schedule(request, schedule_id):
 	Schedule.objects.get(pk = schedule_id).delete()
 	return HttpResponseRedirect('/')
 
+@login_required(login_url = '/login')
 def sms_schedule(request, schedule_id):
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
 	message = str(Schedule.objects.get(pk = schedule_id).message)
@@ -57,7 +59,12 @@ def sms_schedule(request, schedule_id):
 	return HttpResponseRedirect('/set_schedule')
 
 
-
+def email_schedule(request, schedule_id):
+	subject = 'DING REMINDER!'
+	message = str(Schedule.objects.get(pk = schedule_id).message)
+	recipient = 'bmenezes@yelp.com'
+	send_mail(subject, message,'bradmenezes10@gmail.com', [recipient],fail_silently=False)
+	return HttpResponseRedirect('/set_schedule')
 
 
 

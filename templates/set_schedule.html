@@ -19,16 +19,13 @@
 			<span>{{schedule.minute}}</span>
 			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
 			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
-
-
-
+			<span><a href="/email_schedule/{{ schedule.id }}">Send Email</a>	
 
 		</div>
 	{% endfor %}
 {% endif %}
 
 </div>
-
 
 <div class = 'well'>
 	

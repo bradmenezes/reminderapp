@@ -107,7 +107,14 @@ INSTALLED_APPS = (
     'authentication',
     'scheduler',
     'datetime',
+    #'south',
 )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bradmenezes10@gmail.com'
+EMAIL_HOST_PASSWORD = 'yeldarb123'
+EMAIL_PORT = 587
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
