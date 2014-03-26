@@ -8,16 +8,22 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Schedule.message_type'
-        db.delete_column(u'scheduler_schedule', 'message_type')
-
-
-    def backwards(self, orm):
-        # Adding field 'Schedule.message_type'
-        db.add_column(u'scheduler_schedule', 'message_type',
-                      self.gf('django.db.models.fields.CharField')(default='Custom', max_length=20),
+        # Adding field 'Schedule.month'
+        db.add_column(u'scheduler_schedule', 'month',
+                      self.gf('django.db.models.fields.CharField')(max_length=10, null=True),
                       keep_default=False)
 
+
+        # Changing field 'Schedule.day_of_month'
+        db.alter_column(u'scheduler_schedule', 'day_of_month', self.gf('django.db.models.fields.IntegerField')(null=True))
+
+    def backwards(self, orm):
+        # Deleting field 'Schedule.month'
+        db.delete_column(u'scheduler_schedule', 'month')
+
+
+        # Changing field 'Schedule.day_of_month'
+        db.alter_column(u'scheduler_schedule', 'day_of_month', self.gf('django.db.models.fields.IntegerField')())
 
     models = {
         u'auth.group': {
@@ -59,6 +65,7 @@ class Migration(SchemaMigration):
         u'scheduler.schedule': {
             'Meta': {'object_name': 'Schedule'},
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'day_of_month': ('django.db.models.fields.IntegerField', [], {'default': '1', 'null': 'True'}),
             'day_of_week': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'frequency': ('django.db.models.fields.CharField', [], {'default': "'WEEKLY'", 'max_length': '10'}),
             'hour': ('django.db.models.fields.IntegerField', [], {'default': '6'}),
@@ -66,6 +73,7 @@ class Migration(SchemaMigration):
             'message': ('django.db.models.fields.TextField', [], {'max_length': '160'}),
             'minute': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'month': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True'}),
             'start_date': ('django.db.models.fields.DateField', [], {}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
