@@ -10,7 +10,7 @@ from scheduler.forms_scheduler import *
 from reminderapp.views import *
 from django.core.mail import send_mail
 
-
+@login_required(login_url = '/login')
 def set_schedule(request):
 
 	form = SchedulerForm(request.POST or None)
@@ -33,8 +33,8 @@ def set_schedule(request):
 					else: 
 						new_schedule.day_of_week = frequency_to_day[key]
 			
-			if schedule_to_edit.id:
-				new_schedule.id = schedule_to_edit.id
+			# if schedule_to_edit.id:
+			# 	new_schedule.id = schedule_to_edit.id
 
 			new_schedule.save()
 			return HttpResponseRedirect('/set_schedule')
