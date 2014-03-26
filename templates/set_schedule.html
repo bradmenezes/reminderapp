@@ -19,7 +19,8 @@
 			<span>{{schedule.minute}}</span>
 			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
 			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
-			<span><a href="/email_schedule/{{ schedule.id }}">Send Email</a>	
+			<span><a href="/email_schedule/{{ schedule.id }}">Send Email</a>
+			<span><a href="/set_schedule/{{ schedule.id }}">Edit Schedule</a>		
 
 		</div>
 	{% endfor %}
@@ -33,6 +34,14 @@
 
   <form class = "form-inline" action="" method="post">
 		{% csrf_token %}
+ {% comment %} 
+		<div>{{form.message}}</div>
+		<div>{{form.frequency}}</div>
+		<div id = 'datepicker'>{{form.start_date}}</div>
+		<div>{{form.hour}}  </div>
+		<div >{{form.minute}}</div>
+
+{% endcomment %}
 		<table>
 		{{ form.as_table }}
 		</table>

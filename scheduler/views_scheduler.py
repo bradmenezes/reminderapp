@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 
 
 def set_schedule(request):
+
 	form = SchedulerForm(request.POST or None)
 
 	frequency_to_day = {
@@ -31,6 +32,10 @@ def set_schedule(request):
 						new_schedule.day_of_week = new_schedule.start_date.ctime().lower().partition(' ')[0]
 					else: 
 						new_schedule.day_of_week = frequency_to_day[key]
+			
+			if schedule_to_edit.id:
+				new_schedule.id = schedule_to_edit.id
+
 			new_schedule.save()
 			return HttpResponseRedirect('/set_schedule')
 
@@ -38,12 +43,6 @@ def set_schedule(request):
 	print latest_schedule	
 
 	return render (request, 'set_schedule.html', {'form': form, 'latest_schedule': latest_schedule},)
-
-# @login_required(login_url = '/login')
-# def edit_schedule(request):
-	
-# 	# need to figure out how to grab pk from url
-# 	# then same as edit_user_data
 
 @login_required(login_url = '/login')
 def delete_schedule(request, schedule_id):
@@ -60,16 +59,25 @@ def sms_schedule(request, schedule_id):
 
 
 def email_schedule(request, schedule_id):
-	subject = 'DING REMINDER!'
 	message = str(Schedule.objects.get(pk = schedule_id).message)
 	recipient = 'bmenezes@yelp.com'
+	subject = 'DING: ' + message
+
 	send_mail(subject, message,'bradmenezes10@gmail.com', [recipient],fail_silently=False)
 	return HttpResponseRedirect('/set_schedule')
 
+# def edit_schedule(request, schedule_id):
+# 	try:
+# 		schedule_to_edit = Schedule.objects.all().get(pk= schedule_id)
+# 		form = SchedulerForm(request.POST or None, instance = schedule_to_edit)
+# 	except Schedule.DoesNotExist:
+# 		form = SchedulerForm(request.POST or None)
 
+# 	if request.method == 'POST':
+# 		set_schedule(request)
+# 		return HttpResponseRedirect('/set_schedule')
 
-
-
+# 	return render (request, 'set_schedule.html', {'form': form})
 
 
 

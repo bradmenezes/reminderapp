@@ -4,6 +4,8 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from reminderapp.models import TimeStampedModel
 from django.contrib.auth.models import User as AuthUser
+from django.contrib.admin.widgets import AdminDateWidget 
+
 
 # Create your models here.
 class Schedule(TimeStampedModel):
