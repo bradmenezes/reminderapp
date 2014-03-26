@@ -15,8 +15,8 @@ class Schedule(TimeStampedModel):
 		('WEEKLY', 'Weekly'),
 		('WEEKDAYS', 'Weekdays'),
 		('WEEKENDS', 'Weekends'),
-		('MONTHLY', 'Monthly'),
-		('YEARLY', 'Yearly'),
+		#('MONTHLY', 'Monthly'),
+		#('YEARLY', 'Yearly'),
 	)
 
 	HOUR_CHOICES = (
@@ -57,8 +57,8 @@ class Schedule(TimeStampedModel):
 	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'WEEKLY', max_length = 10)
 	day_of_week = models.CharField(max_length = 10)
 	start_date = models.DateField()
-	day_of_month = models.IntegerField(choices = [(i,i) for i in range(31)], default = 1, null=True) 
-	month = models.CharField(max_length = 10, null=True)
+	#day_of_month = models.IntegerField(choices = [(i,i) for i in range(31)], default = 1, null=True) 
+	#month = models.CharField(max_length = 10, null=True)
 	hour = models.IntegerField(choices = HOUR_CHOICES, default= 6)
 	minute = models.IntegerField(choices = [(i,i) for i in range(60)], default = 0)
 	
