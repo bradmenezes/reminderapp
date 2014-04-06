@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand, CommandError
 from apscheduler.scheduler import Scheduler as Scheduler
 #from reminderapp import views
 import logging
-#from reminderapp.models import *
+from reminderapp.models import *
 from twilio.rest import TwilioRestClient
 account_sid = "AC6fe90756ae4096c5bf790984038a3f32"
 auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"

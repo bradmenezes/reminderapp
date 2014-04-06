@@ -20,6 +20,9 @@ def set_schedule(request):
 		'WEEKLY': 'weekly',
 		'WEEKENDS': 'sat-sun',
 		'WEEKDAYS': 'mon-fri',
+		'MONTHLY': '',
+		'YEARLY': '',
+		'ONE_OFF': '',
 	}
 
 	if request.method == 'POST':
