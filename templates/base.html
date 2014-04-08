@@ -3,6 +3,7 @@
 <html lang="en">
 	<head>
 	    <title>{% block title %}{% endblock %}</title>
+	    <meta name="viewport" content="width=device-width, user-scalable=no">
 	    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
  		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -18,11 +19,9 @@
 	</head>
 	<body>
 	    <div class="container">
-	
 		    <ul class="nav nav-tabs">
-			  	<li class="active"><a href="/">Home</a></li>
-				<li><a href="/send_message">Send Message</a></li>
-				<li><a href="/set_schedule">Schedule</a></li>
+			  	<li><a href="/">My Dashboard</a></li>
+				<li><a href="/set_schedule">Change Schedules</a></li>
 				{% if user.is_authenticated %}
 					<li><a href="/logout">Logout</a></li>
 					<li><a>Hello, {{user.username}}</a></li>
