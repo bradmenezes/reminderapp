@@ -47,7 +47,7 @@ def edit_user_data(request):
 			new_user_data = form.save(commit = False)
 			new_user_data.user = request.user
 			new_user_data.save()
-			return HttpResponseRedirect ('/')
+			return HttpResponseRedirect ('/set_schedule')
 	
 	return render (request, 'user_data.html', {'form': form})
 

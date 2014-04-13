@@ -13,7 +13,7 @@ def signup(request):
             new_user = form.save()
             new_user = authenticate(username = request.POST['username'], password = request.POST['password1'])
             login(request, new_user)
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/edit_data")
     else:
         form = UserCreationForm()
     return render(request, "signup.html", {'form': form,})

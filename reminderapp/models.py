@@ -22,3 +22,5 @@ class KeyUserData(TimeStampedModel):
 	user = models.ForeignKey(AuthUser, null = True)
 	zip_code = models.CharField(max_length = 6)
 	phone_number = PhoneNumberField()
+
+	
