@@ -10,10 +10,23 @@
   		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   		<link rel="stylesheet" href="/resources/demos/style.css">
 	 	<script>
+	  		
 	  		$(function() {
-	    		$( "#datepicker" ).datepicker();
+	    		$( "#id_start_date" ).datepicker({ dateFormat: "yy-mm-dd"})
 	  		});
+
 	  	</script>
+
+	  	<style>
+	  		#id_message{
+	  			height: 70px;
+	  		}
+	  		#id_start_date, #id_message, #id_frequency, #id_hour, #id_minute {
+	  			font-size: 14px;
+	  			width: 200px;
+	  		}
+
+	  	</style>
 
 
 	</head>

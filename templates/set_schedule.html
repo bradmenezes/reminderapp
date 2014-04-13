@@ -1,24 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class = 'page-header'>
-	<h3>Schedule</h3>
-</div>
 
 <div class = 'well'>
 	
 <h4>Add a New Scheduled Message</h4>
 
-  <form class = "form-inline" action="" method="post">
+  	<form class = "form-inline" action="" method="post">
 		{% csrf_token %}
- {% comment %} 
-		<div>{{form.message}}</div>
-		<div>{{form.frequency}}</div>
-		<div id = 'datepicker'>{{form.start_date}}</div>
-		<div>{{form.hour}}  </div>
-		<div >{{form.minute}}</div>
-
-{% endcomment %}
 		<table>
 		{{ form.as_table }}
 		</table>
@@ -26,7 +15,6 @@
 	</form>
 
 </div>
-
 
 <div class = 'well'>
 
