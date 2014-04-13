@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from reminderapp.models import TimeStampedModel
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.admin.widgets import AdminDateWidget 
-
+import datetime
 
 # Create your models here.
 class Schedule(TimeStampedModel):
@@ -21,6 +21,12 @@ class Schedule(TimeStampedModel):
 	)
 
 	HOUR_CHOICES = (
+		
+		(1, '1 am'),
+		(2, '2 am'),
+		(3, '3 am'),
+		(4, '4 am'),
+		(5, '5 am'),
 		(6, '6 am'),
 		(7, '7 am'),
 		(8, '8 am'),
@@ -39,12 +45,8 @@ class Schedule(TimeStampedModel):
 		(21, '9 pm'),
 		(22, '10 pm'),
 		(23, '11 pm'),
-		(0, '12 midnight'),
-		(1, '1 am'),
-		(2, '2 am'),
-		(3, '3 am'),
-		(4, '4 am'),
-		(5, '5 am'),
+		(24, '12 midnight'),
+		
 	)
 
 	MESSSAGE_CHOICES = (
@@ -57,7 +59,7 @@ class Schedule(TimeStampedModel):
 	message = models.TextField(max_length = 160)
 	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'WEEKLY', max_length = 10)
 	day_of_week = models.CharField(max_length = 10, null=True, blank = True)
-	start_date = models.DateField()
+	start_date = models.DateField(default=datetime.date.today)
 	hour = models.IntegerField(choices = HOUR_CHOICES, default= 6)
 	minute = models.IntegerField(choices = [(i,i) for i in range(60)], default = 0)
 	
