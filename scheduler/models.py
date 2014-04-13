@@ -22,6 +22,7 @@ class Schedule(TimeStampedModel):
 
 	HOUR_CHOICES = (
 		
+		(0, '12 midnight'),
 		(1, '1 am'),
 		(2, '2 am'),
 		(3, '3 am'),
@@ -44,9 +45,7 @@ class Schedule(TimeStampedModel):
 		(20, '8 pm'),
 		(21, '9 pm'),
 		(22, '10 pm'),
-		(23, '11 pm'),
-		(24, '12 midnight'),
-		
+		(23, '11 pm'),		
 	)
 
 	MESSSAGE_CHOICES = (
