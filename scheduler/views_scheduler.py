@@ -40,12 +40,17 @@ def set_schedule(request):
 			return HttpResponseRedirect('/set_schedule')
 
 	latest_schedule = Schedule.objects.all().filter(user=request.user)
-	print latest_schedule	
 
+	#Define the frequencies a user has schedules on to group in template
+	used_frequency = []
+	for schedule in latest_schedule:
+		if schedule.frequency not in used_frequency:
+			used_frequency.append(str(schedule.frequency))
+	
 	return render (request, 'set_schedule.html', 
 				{'form': form, 
 				'latest_schedule': latest_schedule, 
-				'frequency_to_day': frequency_to_day,})
+				'used_frequency': used_frequency,})
 
 @login_required(login_url = '/login')
 def delete_schedule(request, schedule_id):

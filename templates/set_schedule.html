@@ -19,8 +19,8 @@
 <div class = 'well'>
 	<h4>Current Messages on Schedule</h4>
 	<p></p>
-	{% for frequency in frequency_to_day %}
-		<h5> {{ frequency}} </h5>
+	{% for frequency in used_frequency %}
+		<h5 color = 'blue'> {{ frequency}} </h5>
 		{% for schedule in latest_schedule %}
 			{% if frequency == schedule.frequency %}
 			<div> 
