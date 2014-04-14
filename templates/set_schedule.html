@@ -4,7 +4,7 @@
 
 <div class = 'well'>
 	
-<h4>Add a New Scheduled Message</h4>
+	<h4>Add a New Scheduled Message</h4>
 
   	<form class = "form-inline" action="" method="post">
 		{% csrf_token %}
@@ -17,28 +17,40 @@
 </div>
 
 <div class = 'well'>
-
-<h4>Current Messages on Schedule</h4>
-
-{% if latest_schedule %}
-	{% for schedule in latest_schedule %}
-		<div> 
-			<span>As of {{schedule.start_date }},</span>
-			<span>send me the message '{{schedule.message }}'</span>
-			<span> {{schedule.frequency}}</span>
-			<span> at {{schedule.hour}}:</span>
-			<span>{{schedule.minute}}</span>
-			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
-			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
-			<span><a href="/email_schedule/{{ schedule.id }}">Send Email</a>
-			<span><a href="/set_schedule/{{ schedule.id }}">Edit Schedule</a>		
-		</div>
+	<h4>Current Messages on Schedule</h4>
+	<p></p>
+	{% for frequency in frequency_to_day %}
+		<h5> {{ frequency}} </h5>
+		{% for schedule in latest_schedule %}
+			{% if frequency == schedule.frequency %}
+			<div> 
+				<span>'{{schedule.message }}'</span>
+				<span> at {{schedule.hour}}:</span>
+				<span>{{schedule.minute}}</span>
+				<span>starting  on {{schedule.start_date}}</span>
+			</div>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
-{% endif %}
 
 </div>
 
+<div class = 'well'>
 
+	<h4>Current Messages on Schedule</h4>
 
+	{% for schedule in latest_schedule %}
+		<div> 
+			<span>'{{schedule.message }}'</span>
+			<span> {{schedule.frequency}}</span>
+			<span> at {{schedule.hour}}:</span>
+			<span>{{schedule.minute}}</span>
+			<span>starting  on {{schedule.start_date}}
+			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
+			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
+			<span><a href="/set_schedule/{{ schedule.id }}">Edit Schedule</a>		
+		</div>
+	{% endfor %}
+</div>
 
 {% endblock %}

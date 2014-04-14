@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth import authenticate, login
 from scheduler.models import *
-from scheduler.forms_scheduler import *
+from scheduler.forms_scheduler import * 
 from reminderapp.views import *
 from django.core.mail import send_mail
 
@@ -16,13 +16,13 @@ def set_schedule(request):
 	form = SchedulerForm(request.POST or None)
 
 	frequency_to_day = {
+		'ONE_OFF': '',
 		'DAILY': 'mon-sun',
 		'WEEKLY': 'weekly',
 		'WEEKENDS': 'sat-sun',
 		'WEEKDAYS': 'mon-fri',
 		'MONTHLY': '',
 		'YEARLY': '',
-		'ONE_OFF': '',
 	}
 
 	if request.method == 'POST':
@@ -35,9 +35,6 @@ def set_schedule(request):
 						new_schedule.day_of_week = new_schedule.start_date.ctime().lower().partition(' ')[0]
 					else: 
 						new_schedule.day_of_week = frequency_to_day[key]
-			
-			# if schedule_to_edit.id:
-			# 	new_schedule.id = schedule_to_edit.id
 
 			new_schedule.save()
 			return HttpResponseRedirect('/set_schedule')
@@ -45,7 +42,10 @@ def set_schedule(request):
 	latest_schedule = Schedule.objects.all().filter(user=request.user)
 	print latest_schedule	
 
-	return render (request, 'set_schedule.html', {'form': form, 'latest_schedule': latest_schedule},)
+	return render (request, 'set_schedule.html', 
+				{'form': form, 
+				'latest_schedule': latest_schedule, 
+				'frequency_to_day': frequency_to_day,})
 
 @login_required(login_url = '/login')
 def delete_schedule(request, schedule_id):
