@@ -66,13 +66,31 @@ def view_user_info(request):
 		stock.price = round(float(ystockquote.get_price(stock.stock)),2)
 		stock.stock = (stock.stock).upper()
 	
-	latest_schedules = Schedule.objects.all().filter(user=request.user)
+	#Grab all schedules from db for this user
+	latest_schedule = Schedule.objects.all().filter(user=request.user)
+	
+	#Remove One-off schedules that have passed.
+	today = datetime.date.today()
+	new_schedule = []
+	for schedule in latest_schedule:
+		if schedule.frequency =='ONE_OFF' and schedule.start_date < today:
+			print 'Skip this one'
+		else:
+			new_schedule.append(schedule)
+
+	#Define the frequencies a user has schedules on to group in template
+	used_frequency = []
+	for schedule in new_schedule:
+		if schedule.frequency not in used_frequency:
+			used_frequency.append(str(schedule.frequency))
+
 
 	return render(request,
 		'view_settings.html',
 		{'latest_user_data_list': latest_user_data_list, 
 		'latest_user_stocks_list': latest_user_stocks_list,
-		'latest_schedules': latest_schedules},
+		'latest_schedule': new_schedule,
+		'used_frequency': used_frequency},
 	  	)
 
 @login_required (login_url = '/login')
