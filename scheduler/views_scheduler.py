@@ -85,18 +85,40 @@ def email_schedule(request, schedule_id):
 	send_mail(subject, message,'bradmenezes10@gmail.com', [recipient],fail_silently=False)
 	return HttpResponseRedirect('/set_schedule')
 
-# def edit_schedule(request, schedule_id):
-# 	try:
-# 		schedule_to_edit = Schedule.objects.all().get(pk= schedule_id)
-# 		form = SchedulerForm(request.POST or None, instance = schedule_to_edit)
-# 	except Schedule.DoesNotExist:
-# 		form = SchedulerForm(request.POST or None)
+def edit_schedule(request, schedule_id):
+	
 
-# 	if request.method == 'POST':
-# 		set_schedule(request)
-# 		return HttpResponseRedirect('/set_schedule')
+	frequency_to_day = {
+		'ONE_OFF': '',
+		'DAILY': 'mon-sun',
+		'WEEKLY': 'weekly',
+		'WEEKENDS': 'sat-sun',
+		'WEEKDAYS': 'mon-fri',
+		'MONTHLY': '',
+		'YEARLY': '',
+	}
 
-# 	return render (request, 'set_schedule.html', {'form': form})
+	try:
+		schedule_to_edit = Schedule.objects.all().get(pk= schedule_id)
+		form = SchedulerForm(request.POST or None, instance = schedule_to_edit)
+	except Schedule.DoesNotExist:
+		form = SchedulerForm(request.POST or None)
+
+	if request.method == 'POST':
+		if form.is_valid():
+			new_schedule = form.save(commit=False)
+			new_schedule.user = request.user 
+			for key in frequency_to_day:
+				if key == new_schedule.frequency:
+					if key == 'WEEKLY':
+						new_schedule.day_of_week = new_schedule.start_date.ctime().lower().partition(' ')[0]
+					else: 
+						new_schedule.day_of_week = frequency_to_day[key]
+
+			new_schedule.save()
+			return HttpResponseRedirect('/set_schedule')
+
+	return render (request, 'edit_schedule.html', {'form': form})
 
 
 

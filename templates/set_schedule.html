@@ -20,7 +20,7 @@
 	<h4>Current Messages on Schedule</h4>
 	<p></p>
 	{% for frequency in used_frequency %}
-		<h5 color = 'blue'> {{ frequency}} </h5>
+		<h5> {{ frequency}} </h5>
 		{% for schedule in latest_schedule %}
 			{% if frequency == schedule.frequency %}
 			<div> 
@@ -48,7 +48,7 @@
 			<span>starting  on {{schedule.start_date}}
 			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
 			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
-			<span><a href="/set_schedule/{{ schedule.id }}">Edit Schedule</a>		
+			<span><a href="/edit_schedule/{{ schedule.id }}">Edit Schedule</a>		
 		</div>
 	{% endfor %}
 </div>
