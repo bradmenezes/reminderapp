@@ -9,6 +9,7 @@ from scheduler.models import *
 from scheduler.forms_scheduler import * 
 from reminderapp.views import *
 from django.core.mail import send_mail
+import datetime
 
 @login_required(login_url = '/login')
 def set_schedule(request):
@@ -39,17 +40,27 @@ def set_schedule(request):
 			new_schedule.save()
 			return HttpResponseRedirect('/set_schedule')
 
+	#Grab all schedules from db for this user
 	latest_schedule = Schedule.objects.all().filter(user=request.user)
+	
+	#Remove One-off schedules that have passed.
+	today = datetime.date.today()
+	new_schedule = []
+	for schedule in latest_schedule:
+		if schedule.frequency =='ONE_OFF' and schedule.start_date < today:
+			print 'Skip this one'
+		else:
+			new_schedule.append(schedule)
 
 	#Define the frequencies a user has schedules on to group in template
 	used_frequency = []
-	for schedule in latest_schedule:
+	for schedule in new_schedule:
 		if schedule.frequency not in used_frequency:
 			used_frequency.append(str(schedule.frequency))
 	
 	return render (request, 'set_schedule.html', 
 				{'form': form, 
-				'latest_schedule': latest_schedule, 
+				'latest_schedule': new_schedule, 
 				'used_frequency': used_frequency,})
 
 @login_required(login_url = '/login')
