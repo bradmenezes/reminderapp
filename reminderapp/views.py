@@ -10,6 +10,7 @@ from django.template import RequestContext
 import ystockquote
 import datetime
 from scheduler.models import *
+from scheduler.forms_scheduler import * 
 
 @login_required (login_url = '/login')
 def edit_stocks(request):
@@ -84,14 +85,41 @@ def view_user_info(request):
 		if schedule.frequency not in used_frequency:
 			used_frequency.append(str(schedule.frequency))
 
+	frequency_to_day = {
+		'ONE_OFF': '',
+		'DAILY': 'mon-sun',
+		'WEEKLY': 'weekly',
+		'WEEKENDS': 'sat-sun',
+		'WEEKDAYS': 'mon-fri',
+		'MONTHLY': '',
+		'YEARLY': '',
+	}
+
+
+
+	form = SchedulerForm(request.POST or None)
+
+	if request.method == 'POST':
+		if form.is_valid():
+			new_schedule = form.save(commit=False)
+			new_schedule.user = request.user 
+			for key in frequency_to_day:
+				if key == new_schedule.frequency:
+					if key == 'WEEKLY':
+						new_schedule.day_of_week = new_schedule.start_date.ctime().lower().partition(' ')[0]
+					else: 
+						new_schedule.day_of_week = frequency_to_day[key]
+			new_schedule.save()
+			return HttpResponseRedirect('/')
 
 	return render(request,
 		'view_settings.html',
 		{'latest_user_data_list': latest_user_data_list, 
 		'latest_user_stocks_list': latest_user_stocks_list,
 		'latest_schedule': new_schedule,
-		'used_frequency': used_frequency},
-	  	)
+		'used_frequency': used_frequency,
+		'form': form,
+	  	})
 
 @login_required (login_url = '/login')
 def delete_stock(request, stock_id):
