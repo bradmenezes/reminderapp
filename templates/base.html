@@ -15,47 +15,143 @@
 	  		$(function() {
 				$( "#id_start_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0,})
 			});
-
-
 	  	</script>
 
 	  	<style>
+	  		
+	  		html * {
+			   color: #000;
+			   font-family: Arial !important;
+			}
+
+
 	  		#id_message{
-	  			height: 70px;
+	  			height: 80px;
 	  		}
 	  		#id_start_date, #id_message, #id_frequency, #id_hour, #id_minute {
 	  			font-size: 14px;
-	  			width: 200px;
+	  			width: 170px;
 	  		}
 	  		.left-col{
 	  			border-right: 1px solid #e5e5e1;
-	  			padding-top: 15px;
+	  			padding-top: 16px
+	  		}
+
+	  		.right-column{
+	  			padding-left: 24px;
 	  		}
 	  		.inside{}
 
+	  		.content-body{
+	  			padding-top: 42px;
+	  			border: 1px solid #ccccc8;
+	  			background: white;
+	  			min-height: 750px;
+
+	  		}
+
+	  		.background{
+	  			background: #f5f5f1;
+	  		}
+
+	  		.navbar{
+				box-shadow: 0 0 10px #44494E;
+				border: none;
+	  		}
+
+	  		.list-title{
+	  			font-weight: bold;
+	  		}
+	  		h1, h2, h3, h4 {
+	  			color: #0478B9;
+	  			padding-bottom: 6px;
+	  			padding-top: 12px;
+	  		}
+
+	  		h5 {
+	  			font-weight: bold;
+	  			padding-bottom: 6px;
+	  			padding-top: 12px;
+	  		}
+
+	  		.submit-button{
+	  			width: 246px;
+	  		}
+
+	  		.link-small{
+	  			font-size: 12px;
+	  			color: #0478B9;
+	  		}
+
+	  		.navbar-brand{
+	  			margin-left: -13px;
+	  		}
+
+	  		.navbar{
+	  			background-color: #3882CD
+	  		}
+
+	  		.navbar-default .navbar-nav>li>a {
+	  			color: white;
+	  		}
+	  		.navbar-default .navbar-brand{
+	  			color: white;
+	  		}
+
 	  	</style>
-
-
 	</head>
 	<body>
-	    
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	    <div class="container">
-	    	<div class = "row">
-			    <ul class="nav nav-tabs">
-				  	<li><a href="/">My Dashboard</a></li>
-					<li><a href="/set_schedule">Change Schedules</a></li>
-					{% if user.is_authenticated %}
-						<li><a href="/logout">Logout</a></li>
-						<li><a>Hello, {{user.username}}</a></li>
-					{% endif %}
 
-				</ul>
-			</div>
-		</div>
+<!-- HEADER -->
+<div class = 'background'>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+	<div class = 'container inside-container'>
 
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/">ReminderApp</a>
+	    </div>
 
-	    {% block content %}{% endblock %}
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav ">
+	        <li class="active"><a href="/">Dashboard</a></li>
+	        <li><a href="/set_schedule">Edit Schedules</a></li>
+	      </ul>
+
+	      {% if user.is_authenticated %}
+
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">{{user.username}}</a></li>
+	        <li><a href="/logout">Log out</a></li>
+	      </ul>
+	      {% else %}
+		      <button type="button" class="btn btn-default navbar-btn">Sign up</button>
+			  <button type="button" class="btn btn-default navbar-btn">Log in</button>
+	      {% endif %}
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</div> <!-- container inside container-->
+</nav>
+
+<!-- Header--> 
+
+<div class = 'container inside-container content-body'>
+  <div class = "row">
+
+	    {% block content %}
+	    {% endblock %}
+  
+  </div> <!-- Container inside-container -->
+</div> <!-- row -->
+
 	    {% block footer %}
 	    
 	    <div class="panel panel-default">
@@ -67,5 +163,9 @@
   			</div>
 		</div>
 	    {% endblock %}
+
+</div> <!-- background -->
+
 	</body>
 </html>
+
