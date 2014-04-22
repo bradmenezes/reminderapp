@@ -9,13 +9,13 @@
  		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
   		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   		<link rel="stylesheet" href="/resources/demos/style.css">
-	 	<script type = 'text/javascript' src= 'set_schedule.js'></script>
+	 	<script type = 'text/javascript' src= '{{STATIC_URL}}set_schedule.js'></script>
 
 	 	<script>
-	  		
 	  		$(function() {
-	    		$( "#id_start_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0,})
-	  		});
+				$( "#id_start_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0,})
+			});
+
 
 	  	</script>
 
@@ -27,22 +27,34 @@
 	  			font-size: 14px;
 	  			width: 200px;
 	  		}
+	  		.left-col{
+	  			border-right: 1px solid #e5e5e1;
+	  			padding-top: 15px;
+	  		}
+	  		.inside{}
 
 	  	</style>
 
 
 	</head>
 	<body>
+	    
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	    <div class="container">
-		    <ul class="nav nav-tabs">
-			  	<li><a href="/">My Dashboard</a></li>
-				<li><a href="/set_schedule">Change Schedules</a></li>
-				{% if user.is_authenticated %}
-					<li><a href="/logout">Logout</a></li>
-					<li><a>Hello, {{user.username}}</a></li>
-				{% endif %}
+	    	<div class = "row">
+			    <ul class="nav nav-tabs">
+				  	<li><a href="/">My Dashboard</a></li>
+					<li><a href="/set_schedule">Change Schedules</a></li>
+					{% if user.is_authenticated %}
+						<li><a href="/logout">Logout</a></li>
+						<li><a>Hello, {{user.username}}</a></li>
+					{% endif %}
 
-			</ul>
+				</ul>
+			</div>
+		</div>
+
+
 	    {% block content %}{% endblock %}
 	    {% block footer %}
 	    
@@ -53,8 +65,7 @@
   			<div class="panel-footer">
   				<a href = /admin>Admin link </a>
   			</div>
-			</div>
-	</div>
+		</div>
 	    {% endblock %}
 	</body>
 </html>

@@ -95,8 +95,6 @@ def view_user_info(request):
 		'YEARLY': '',
 	}
 
-
-
 	form = SchedulerForm(request.POST or None)
 
 	if request.method == 'POST':

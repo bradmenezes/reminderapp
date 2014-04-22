@@ -56,7 +56,7 @@ class Schedule(TimeStampedModel):
 
 	user = models.ForeignKey(AuthUser)
 	message = models.TextField(max_length = 160)
-	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'WEEKLY', max_length = 10)
+	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'ONE_OFF', max_length = 10)
 	day_of_week = models.CharField(max_length = 10, null=True, blank = True)
 	start_date = models.DateField(default=datetime.date.today)
 	hour = models.IntegerField(choices = HOUR_CHOICES, default= 6)
