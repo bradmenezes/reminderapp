@@ -4,7 +4,7 @@
   
     <div class = 'col-xs-3 left-col'>
       
-      <h4>New Scheduled Message</h4>
+      <h4>Add Scheduled Message</h4>
 
         <form class = "form-inline" action="" method="post">
         {% csrf_token %}
@@ -16,12 +16,14 @@
 
     {% if latest_user_stocks_list %}
         <h4>Your Stocks </h4>
-          {% for user_stocks in latest_user_stocks_list %} 
-              <div>
-                <span class = 'list-title'>{{ user_stocks.stock }}</span>  
-                <span> ${{user_stocks.price}} </span>
-              </div>
-          {% endfor %}    
+          <table>
+            {% for user_stocks in latest_user_stocks_list %} 
+                <tr>
+                  <td class = 'list-title'>{{ user_stocks.stock }}</td>
+                  <td class = 'stock-price'>${{user_stocks.price}}</td> 
+                </tr>
+            {% endfor %}    
+          </table>
           <a href="/edit_stocks" class = "link-small">Edit Stocks</a>      
     {% else %}
       <div>

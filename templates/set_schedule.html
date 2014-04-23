@@ -2,55 +2,34 @@
 
 {% block content %}
 
-<div class = 'well'>
+<div class = 'col-xs-9 left-col'><h4>Current Messages on Schedule</h4>
+
+<table>
+{% for frequency in used_frequency %}
 	
-	<h4>Add a New Scheduled Message</h4>
-
-  	<form class = "form-inline" action="" method="post">
-		{% csrf_token %}
-		<table>
-		{{ form.as_table }}
-		</table>
-		<button type="submit button" class="btn btn-primary">Set Schedule</button> 
-	</form>
-
-</div>
-
-<div class = 'well'>
-	<h4>Current Messages on Schedule</h4>
-	<p></p>
-	{% for frequency in used_frequency %}
-		<h5> {{ frequency}} </h5>
-		{% for schedule in latest_schedule %}
-			{% if frequency == schedule.frequency %}
-			<div> 
-				<span>'{{schedule.message }}'</span>
-				<span> at {{schedule.hour}}:</span>
-				<span>{{schedule.minute}}</span>
-				<span>starting  on {{schedule.start_date}}</span>
-			</div>
-			{% endif %}
-		{% endfor %}
-	{% endfor %}
-
-</div>
-
-<div class = 'well'>
-
-	<h4>Current Messages on Schedule</h4>
-
+	<tr><td><h5> {{frequency}}</h5> <td></tr>
+	
 	{% for schedule in latest_schedule %}
-		<div> 
-			<span>'{{schedule.message }}'</span>
-			<span> {{schedule.frequency}}</span>
-			<span> at {{schedule.hour}}:</span>
-			<span>{{schedule.minute}}</span>
-			<span>starting  on {{schedule.start_date}}
-			<span><a href="/delete_schedule/{{ schedule.id }}">Remove &nbsp &nbsp &nbsp</a>
-			<span><a href="/sms_schedule/{{ schedule.id }}">Send Test</a>
-			<span><a href="/edit_schedule/{{ schedule.id }}">Edit Schedule</a>		
-		</div>
+		
+		{% if frequency == schedule.frequency %}
+		
+			<tr>
+				<td class = 'message-left-col' >
+					<span>'{{schedule.message }}'</span>
+					<span> at {{schedule.hour}}:</span>
+					<span>{{schedule.minute}}</span>
+					<span>starting  on {{schedule.start_date}}</span>
+				</td>
+				<td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
+				<td class = 'link-small'><a href="/delete_schedule/{{ schedule.id }}">Remove</a></td>
+				<td class = 'link-small'><a href="/edit_schedule/{{ schedule.id }}">Edit Schedule</td>
+			</tr>
+		
+		{% endif %}
 	{% endfor %}
-</div>
+	
+{% endfor %}
+</table>
+</div> <!-- -->
 
 {% endblock %}

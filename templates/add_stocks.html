@@ -1,26 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class = 'page-header'>
-	<h3>Your Stocks</h3>
-</div>
-
-<div class = 'well'>
-
-  <form class = "form-inline" action="" method="post">
-		{% csrf_token %}
-		{{ form.stock }}
-  
-		<button type="submit button" class="btn btn-primary">Add Stock</button> 
-</form>
-    {% if latest_user_stocks_list %}
-            {% for user_stocks in latest_user_stocks_list %} 
-               <p>{{ user_stocks.stock }}   ${{ user_stocks.price}}
-    			<a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a>
-    		</p>
-    {% endfor %}    
-    	
-    {% endif %}
-</div>
+	
+<div class = 'col-xs-3 left-col'>
+    <h4>Add Stock Symbol</h4>
+    
+    <form class = "form-inline" action="" method="post">
+  		{% csrf_token %}
+  		{{ form.as_table }}
+  		<button type="submit button" class="btn btn-primary submit-button">Add stock</button> 
+    </form>
+    
+    <div>
+      {% if latest_user_stocks_list %}
+        <h4>Your Stocks </h4>
+        <table>
+          {% for user_stocks in latest_user_stocks_list %} 
+                <tr>
+                  <td class = 'list-title'>{{ user_stocks.stock }}</td>
+                  <td class = 'stock-price'>${{user_stocks.price}}</td> 
+                  <td> <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a></td>
+                </tr>
+          {% endfor %}    
+        </table>
+      {% endif %}
+    </div> 
+</div> <!-- left-col-->
 
 {% endblock %}
+
+<!--
+
+  <div>
+                <span class = 'list-title'>{{ user_stocks.stock }}</span> 
+                  <span> ${{user_stocks.price}} </span>
+                  <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a>
+              </div>
+
+                  <table>
+                <ul><span class = 'list-title'></span> 
+                  <span>  </span>
+                  <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a><ul>
+
