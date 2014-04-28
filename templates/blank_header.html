@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html lang="en">
+	<head>
+	    <title>{% block title %}{% endblock %}</title>
+	    <meta name="viewport" content="width=device-width, user-scalable=no">
+	    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+ 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  		<link rel="stylesheet" href="/resources/demos/style.css">
+	 	<script type = 'text/javascript' src= '{{STATIC_URL}}set_schedule.js'></script>
+
+	 	<script>
+	  		$(function() {
+				$( "#id_start_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0,})
+			});
+	  	</script>
+
+	  	<style>
+	  		
+	  		html * {
+			   font-family: Arial !important;
+			}
+
+	  		.id_username, .id_password, .btn-auth {
+	  			width: 356px;
+	  		}
+
+	  		.signup-form{
+	  			padding-bottom: 14px;
+	  		}
+
+	  		.under-button-txt{
+	  			padding-top: 6px;
+	  			text-align: right;
+	  		}
+
+	  		.content-body{
+	  			padding-top: 42px;
+	  			border: 1px solid #ccccc8;
+	  			background: white;
+	  			min-height: 750px;
+	  			padding-left: 30px;
+
+	  		}
+
+	  		.background{
+	  			background: #f5f5f1;
+	  		}
+
+	  		.navbar{
+				box-shadow: 0 0 10px #44494E;
+				border: none;
+	  		}
+
+	  		.left-col{
+	  			border-right: 1px solid #e5e5e1;
+	  			padding-top: 16px;
+
+	  		}
+
+	  		.right-column{
+	  			padding-left: 24px;
+	  		}
+
+	  			h1, h2, h3, h4 {
+	  			color: #0478B9;
+	  			padding-bottom: 6px;
+	  			padding-top: 12px;
+	  		}
+
+	  		.navbar-brand{
+	  			margin-left: -13px;
+	  		}
+
+	  		.navbar{
+	  			background-color: #3882CD
+	  		}
+
+	  		.navbar-default .navbar-nav>li>a {
+	  			color: white;
+	  		}
+	  		.navbar-default .navbar-brand{
+	  			color: white;
+	  		}
+
+	  	</style>
+	</head>
+	<body>
+
+	<!-- HEADER -->
+	<div class = 'background'>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"></nav>
+
+	<!-- End Header--> 
+
+	<div class = 'container inside-container content-body'>
+	  	<div class = "row">
+		    {% block content %}
+			{% endblock %}
+	  	</div> <!-- row -->
+	 </div> <!-- Container inside-container -->
+
+	</body>
+</html>

@@ -30,6 +30,7 @@
 	  			font-size: 14px;
 	  			width: 166px;
 	  		}
+
 	  		.left-col{
 	  			border-right: 1px solid #e5e5e1;
 	  			padding-top: 16px;
@@ -80,9 +81,18 @@
 	  			padding-top: 12px;
 	  		}
 
-	  		.submit-button{
+	  		.left-col-full-width{
 	  			width: 247px;
-	  			margin-top: 12px;
+	  			margin-top: 3px;
+	  		}
+
+	  		.secondary-button{
+	  			color: rgb(88, 88, 90);
+	  			background: linear-gradient(rgba(255, 255, 255, 0.88), #f0f0f0);
+	  			border: 1px solid rgba(0,0,0,0.2);
+	  			text-shadow: 0 1px 0 #fff;
+	  			box-shadow: 0 1px 1px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.8);
+
 	  		}
 
 	  		.link-small{
@@ -149,8 +159,8 @@
 	        <li><a href="/logout">Log out</a></li>
 	      </ul>
 	      {% else %}
-		      <button type="button" class="btn btn-default navbar-btn">Sign up</button>
-			  <button type="button" class="btn btn-default navbar-btn">Log in</button>
+		      <a href = '/signup' type="button" class="btn btn-default navbar-btn">Sign up</a>
+			  <a href = '/login' type="button" class="btn btn-default navbar-btn">Log in</a>
 	      {% endif %}
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -166,17 +176,10 @@
   	</div> <!-- row -->
  </div> <!-- Container inside-container -->
 
-	    {% block footer %}
-	    
-	    <div class="panel panel-default">
-  			<div class="panel-body">
-    			
-  			</div>
-  			<div class="panel-footer">
-  				<a href = /admin>Admin link </a>
-  			</div>
-		</div>
-	    {% endblock %}
+
+{% block footer %}
+
+{% endblock %}
 
 </div> <!-- background -->
 

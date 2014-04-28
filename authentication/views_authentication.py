@@ -7,13 +7,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 
 def signup(request):
+    
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            print 'form valid'
             new_user = form.save()
             new_user = authenticate(username = request.POST['username'], password = request.POST['password1'])
             login(request, new_user)
             return HttpResponseRedirect("/edit_data")
+        else:
+            print 'form not valid'
     else:
         form = UserCreationForm()
     return render(request, "signup.html", {'form': form,})
@@ -33,14 +38,13 @@ def login_user(request):
     if request.method == 'POST':
 	    if user is not None and user.is_active:
 	        auth.login(request, user)
-	        if 'next' in request.POST:
-	            errors.append('in the if')
+            if 'next' in request.POST:
 	            next = request.POST['next']
 	            return HttpResponseRedirect(next)
-	        else: 
-	            return HttpResponseRedirect("/")
-    else:
-    	errors.append('') #write an email/password do not match error msg
+            else:
+                return HttpResponseRedirect("/")
+    # else:
+    #     errors.append('Email and password do not match. Please try again.') #write an email/password do not match error msg
     return render(request, 'login.html', {'errors': errors})
 
 

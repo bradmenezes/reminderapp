@@ -1,10 +1,53 @@
-{% extends "base.html" %}
+{% extends "blank_header.html" %}
 
 {% block content %}
 
-<div class = 'well'>
+
+<div class = 'col-xs-4'>
+    <h2>Sign up for ReminderApp</h2>
+
+    {% if errors %}
+        {% for error in errors %}
+            <p> {{ error }}<p/>
+        {% endfor %}
+    {% endif %}
+
+    <form class = "form" action="" method="post">
+    <div class = 'signup-form'>
+        <label for = "Username">Username </label>  
+        <input id="id_username" class = 'form-control id_username'maxlength="30" name="username" type="text">
+    </div>
+    
+    <div class = 'signup-form'>
+        <label for = "id_password1">Password</label>  
+        <input id="id_password1" class = 'form-control id_password'name="password1" type="password">
+    </div>   
+
+    <div class = 'signup-form'>
+        <label for = "id_password2">Confirm Password</label>  
+        <input id="id_password2" class = 'form-control id_password'name="password2" type="password">
+    </div>  
+
+    {% csrf_token %}
+    <button class="btn btn-lg btn-primary btn-block btn-auth" type="submit" value = 'Signup'>Sign up </button>
+    
+    </form>
+	<div class = 'under-button-txt'>Already have an account?
+    <a href="/login"> Log in</a>
+	</div>
+{% endblock %}
+
+<!-- <form class = "form-inline" action="" method="post">
+  {% csrf_token %}
+  <table>
+  	{{form.as_table}}
+  </table>
+  <input type="submit" value="Signup">
+</form> -->
 
 
+
+<!-- 
   <h1>Create an account for Reminder App</h1>
 
   <form class = "form-inline" action="" method="post">
@@ -12,8 +55,14 @@
 
       {% csrf_token %}
       <input type="submit" value="Signup">
-  </form>
 
 
-</div>
-{% endblock %}
+
+  </form> 
+
+        <input class = "form-control id_username" type="text" name="username" label = "Username">
+
+
+-->
+
+
