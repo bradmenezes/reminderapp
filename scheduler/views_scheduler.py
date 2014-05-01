@@ -74,7 +74,7 @@ def sms_schedule(request, schedule_id):
 	message = str(Schedule.objects.get(pk = schedule_id).message)
 
 	phone_sms(request, message, phone_number)
-	return HttpResponseRedirect('/set_schedule')
+	return HttpResponseRedirect('/')
 
 
 def email_schedule(request, schedule_id):
