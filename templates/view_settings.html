@@ -2,7 +2,7 @@
 
 {% block content %}
   
-    <div class = 'col-xs-3 left-col'>
+  <div class = 'col-md-3 left-col'>
       
       {% if latest_user_data_list %}
       <h4>Add Scheduled SMS</h4>
@@ -32,7 +32,7 @@
       <p>Add stocks so that you can set up schedules to get their price in real-time!</p>
       <a href="/edit_stocks"><button type="button" class="btn secondary-button left-col-full-width">Add Stocks</button></a>
     </div>
-  {% endif %}
+    {% endif %}
 
   
   <h4>Your Settings</h4>
@@ -55,8 +55,10 @@
 
     {% endif %}
 
-</div>
-    <div class = 'col-xs-9 right-column'>
+</div> <!--Left Col -->
+
+
+    <div class = 'col-md-9 right-column'>
       {% if latest_schedule %}
       <h3>Current Messages on Schedule</h3>
       <p></p>
