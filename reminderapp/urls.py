@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^sms_schedule/(\d{1,2})/$', scheduler.sms_schedule),
     url(r'^email_schedule/(\d{1,2})/$', scheduler.email_schedule),
     url(r'^edit_schedule/(\d{1,2})/$', scheduler.edit_schedule),
+    url(r'^mobile/$', scheduler.mobile_instructions),
+    url(r'^mobile_sms/$', scheduler.mobile_sms),
 
 )
 

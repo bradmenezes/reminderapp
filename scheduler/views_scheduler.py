@@ -121,11 +121,22 @@ def edit_schedule(request, schedule_id):
 	return render (request, 'edit_schedule.html', {'form': form})
 
 
+#Load mobile page
+@login_required(login_url = '/login')
+def mobile_instructions(request):
+	return render(request, 'mobile_instructions.html',)
 
+#SMS the user instruction of how to get it on their phone
+def mobile_sms(request):
+	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
 
+	instructions_message = '1. Click the link\n2. Click the box with arrow icon\n3. Add to Home Screen'
+	phone_sms(request, instructions_message, phone_number)	
 
+	link_message = 'www.shrouded-peak-4089.herokuapp.com/mobile'
+	phone_sms(request, link_message, phone_number)
 
-
+	return HttpResponseRedirect('/mobile')
 
 
 

@@ -5,29 +5,30 @@
   <div class = 'col-md-3 left-col'>
       
       {% if latest_user_data_list %}
-      <h4>Add Scheduled SMS</h4>
+        <h4>Add Scheduled SMS</h4>
 
-        <form class = "form-inline" action="" method="post">
-          {% csrf_token %}
-          <table>
-          {{ form.as_table }}
-          </table>
-          <button type="submit button" class="btn btn-primary left-col-full-width">Set Schedule</button> 
-        </form>
+          <form class = "form-inline" action="" method="post">
+            {% csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+            <button type="submit button" class="btn btn-primary left-col-full-width">Set Schedule</button> 
+          </form>
       {% endif %}
   
-      <h4>Your Stocks </h4>
-        {% if latest_user_stocks_list %}
-          <table>
-            {% for user_stocks in latest_user_stocks_list %} 
-                <tr>
-                  <td class = 'list-title'>{{ user_stocks.stock }}</td>
-                  <td class = 'stock-price'>${{user_stocks.price}}</td> 
-                </tr>
-            {% endfor %}    
-          </table>
-          <a href="/edit_stocks" class = "link-small">Edit Stocks</a> 
-        {% else %}
+    <h4>Your Stocks </h4>
+      {% if latest_user_stocks_list %}
+        <table>
+          {% for user_stocks in latest_user_stocks_list %} 
+              <tr>
+                <td class = 'list-title'>{{ user_stocks.stock }}</td>
+                <td class = 'stock-price'>${{user_stocks.price}}</td> 
+              </tr>
+          {% endfor %}    
+        </table>
+        <a href="/edit_stocks" class = "link-small">Edit Stocks</a> 
+      {% else %}
+    
     <div>
       <p>Add stocks so that you can set up schedules to get their price in real-time!</p>
       <a href="/edit_stocks"><button type="button" class="btn secondary-button left-col-full-width">Add Stocks</button></a>
@@ -60,29 +61,47 @@
 
     <div class = 'col-md-9 right-column'>
       {% if latest_schedule %}
-      <h3>Current Messages on Schedule</h3>
-      <p></p>
-      {% for frequency in used_frequency %}
-        <h5> {{ frequency}} </h5>
-        {% for schedule in latest_schedule %}
-          {% if frequency == schedule.frequency %}
-            <div> 
-              <span>'{{schedule.message }}'</span>
-              <span> at {{schedule.hour}}:</span>
-              <span>{{schedule.minute}}</span>
-              <span>starting  on {{schedule.start_date}}</span>
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-      <p></p>
-      <a href="/set_schedule" class = "link-small">Edit Schedules</a>
-      
+        <h3>Current Messages on Schedule</h3>
+
+        <table>
+          {% for frequency in used_frequency %}
+            <tr><td><h5> {{frequency}}</h5> <td></tr>
+            {% for schedule in latest_schedule %}
+              {% if frequency == schedule.frequency %}
+                <tr>
+                  <td class = 'message-left-col' >
+                    <span>'{{schedule.message }}'</span>
+                    <span> at {{schedule.hour}}:</span>
+                    <span>{{schedule.minute}}</span>
+                    <span>starting  on {{schedule.start_date}}</span>
+                  </td>
+                  <td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
+                </tr>
+              
+              {% endif %} <!--if frequency == -->
+            {% endfor %} <!--for schedule  --> 
+          {% endfor %} <!--for frequency  -->
+        </table>
+
+        <p></p>
+        <a href="/set_schedule" class = "link-small">Edit Schedules</a>
+        
       {% else %}
       <h3>Welcome to ReminderApp!</h3>
-        <p>After setting up your ZIP and Phone number, try setting up your first schedule on the left!</p>
+        <p>After setting up your ZIP and Phone number, try setting up your first schedule on the left! A schedule is a recurring or one-time SMS message you'd like to receive on your phone.</p>
 
       {% endif %}
+
+      <h4>SMS reminders to try</h4>
+      <ul>
+        <li>Doctor's Appointments</li>
+        <li>Gym Days</li>
+        <li>Errands</li>
+        <li>Friend's Birthdays</li>
+        <li>Anniverssaries</li>
+        <li>Tasks with deadlines</li>
+        <li>and more!</li>
+      </ul>
     </div> <!-- col-xs-9 -->
 
 
