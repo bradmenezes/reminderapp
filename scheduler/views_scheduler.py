@@ -133,7 +133,7 @@ def mobile_sms(request):
 	instructions_message = '1. Click the link\n2. Click the box with arrow icon\n3. Add to Home Screen'
 	phone_sms(request, instructions_message, phone_number)	
 
-	link_message = 'www.shrouded-peak-4089.herokuapp.com/mobile'
+	link_message = 'http://shrouded-peak-4089.herokuapp.com'
 	phone_sms(request, link_message, phone_number)
 
 	return HttpResponseRedirect('/mobile')

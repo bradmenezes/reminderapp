@@ -59,7 +59,7 @@ class Schedule(TimeStampedModel):
 	frequency = models.CharField(choices = FREQUENCY_CHOICES, default = 'ONE_OFF', max_length = 10)
 	day_of_week = models.CharField(max_length = 10, null=True, blank = True)
 	start_date = models.DateField(default=datetime.date.today)
-	hour = models.IntegerField(choices = HOUR_CHOICES, default= 6)
+	hour = models.IntegerField(choices = HOUR_CHOICES, default= 12)
 	minute = models.IntegerField(choices = [(i,i) for i in range(60)], default = 0)
 	
 
