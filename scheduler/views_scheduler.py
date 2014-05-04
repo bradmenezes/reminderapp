@@ -122,6 +122,9 @@ def edit_schedule(request, schedule_id):
 	return render (request, 'edit_schedule.html', {'form': form})
 
 
+
+#fake comment
+
 #Load mobile page
 @login_required(login_url = '/login')
 def mobile_instructions(request):
