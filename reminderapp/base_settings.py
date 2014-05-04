@@ -107,7 +107,7 @@ INSTALLED_APPS = (
     'authentication',
     'scheduler',
     'datetime',
-    'south',#this is ON
+    'south',
 )
 
 EMAIL_USE_TLS = True

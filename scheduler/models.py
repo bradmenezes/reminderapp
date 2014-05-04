@@ -54,6 +54,9 @@ class Schedule(TimeStampedModel):
 		('Weather', 'Weather'),
 	)
 
+	#need to make changes for heroku...
+
+
 	user = models.ForeignKey(AuthUser)
 	type = models.CharField(choices = MESSSAGE_CHOICES, default = 'Custom', max_length = 15)
 	message = models.TextField(max_length = 160, null = True, blank = True, default = '')
