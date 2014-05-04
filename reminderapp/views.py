@@ -166,12 +166,12 @@ def send_message(request):
 
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
 	print type(phone_number)
-	phone_sms (request, message, phone_number)
+	phone_sms (message, phone_number)
 	
 	return HttpResponseRedirect('/')
 
 #def phone_sms(request, text, number):
-def phone_sms(request, text, number):
+def phone_sms(message, phone_number):
 
     from twilio.rest import TwilioRestClient
     
@@ -180,12 +180,24 @@ def phone_sms(request, text, number):
     auth_token  = "97e8833ee3553bc4d9d16e86f1865d32"
     client = TwilioRestClient(account_sid, auth_token)
     
-    #if request.method == 'POST':
-        #sms_text = request.POST.get('sms_text', '')
-    sms_text = text
-    #message = 
     client.sms.messages.create(
-        body=sms_text,
-        to=number,    # Brad's Phone number
+        body=message,
+        to=phone_number,
         from_="+16502674790")
+
+def test(user, message, phone_number):
+
+	print 'HEY I"m In!'
+	latest_user_stocks_list = Stocks.objects.all().get(user = user)
+	
+	for stock in latest_user_stocks_list:
+			stock_price = round(float(ystockquote.get_price(stock.stock)),2)
+			stock_symbol = (stock.stock).upper()
+			message += str(stock_symbol) + str(stock.price)
+			
+			if len(message) >= 150:
+				phone_sms(message, phone_number)
+				message = ''
+
+	phone_sms(message, phone_number)
 

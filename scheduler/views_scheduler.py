@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from scheduler.models import *
 from scheduler.forms_scheduler import * 
 from reminderapp.views import *
+from reminderapp.models import *
 from django.core.mail import send_mail
 import datetime
 
@@ -73,7 +74,7 @@ def sms_schedule(request, schedule_id):
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
 	message = str(Schedule.objects.get(pk = schedule_id).message)
 
-	phone_sms(request, message, phone_number)
+	phone_sms(message, phone_number)
 	return HttpResponseRedirect('/')
 
 
@@ -131,13 +132,32 @@ def mobile_sms(request):
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
 
 	instructions_message = '1. Click the link\n2. Click the box with arrow icon\n3. Add to Home Screen'
-	phone_sms(request, instructions_message, phone_number)	
+	phone_sms(instructions_message, phone_number)	
 
 	link_message = 'http://shrouded-peak-4089.herokuapp.com'
-	phone_sms(request, link_message, phone_number)
+	phone_sms(link_message, phone_number)
 
 	return HttpResponseRedirect('/mobile')
 
+def send_stocks_sms(user, phone_number):
 
+	message = ''
 
-	
+	try:
+		latest_user_stocks_list = Stocks.objects.all().filter(user = user)
+		print latest_user_stocks_list
+		print 'in the try'
+		for stock in latest_user_stocks_list:
+			stock_price = round(float(ystockquote.get_price(stock.stock)),2)
+			stock_symbol = (stock.stock).upper()
+			message += str(stock_symbol) + ' $' + str(stock_price) + '\n'
+			print len(message)
+
+			if len(message) >= 150:
+				phone_sms(message, phone_number)
+				message = ''
+		if message != '':
+			phone_sms(message, phone_number)
+	except Stocks.DoesNotExist:
+		print 'hey'
+
