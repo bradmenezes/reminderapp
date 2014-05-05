@@ -23,8 +23,6 @@ urlpatterns = patterns('',
     url(r'^delete_stocks/(\d{1,6})/$', views.delete_stock),
     url(r'^send_message/$', views.send_message),
 
-    url(r'^weather/$', views.get_weather),
-
     url(r'^set_schedule/$', scheduler.set_schedule),
     url(r'^delete_schedule/(\d{1,6})/$', scheduler.delete_schedule),
     url(r'^sms_schedule/(\d{1,6})/$', scheduler.sms_schedule),
