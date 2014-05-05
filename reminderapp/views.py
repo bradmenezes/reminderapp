@@ -39,6 +39,7 @@ def edit_user_data(request):
 	
 	try:
 		user_data_to_edit = KeyUserData.objects.get(user = request.user)
+		user_data_to_edit.phone_number = user_data_to_edit.phone_number.replace("+1", "") 
 		form = KeyUserDataForm(request.POST or None, instance = user_data_to_edit)
 	except KeyUserData.DoesNotExist:
 		form = KeyUserDataForm(request.POST or None)
@@ -47,6 +48,7 @@ def edit_user_data(request):
 		if form.is_valid():
 			new_user_data = form.save(commit = False)
 			new_user_data.user = request.user
+			new_user_data.phone_number = '+1' + str(new_user_data.phone_number)
 			new_user_data.save()
 			return HttpResponseRedirect ('/')
 	

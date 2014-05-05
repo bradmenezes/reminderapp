@@ -2,7 +2,7 @@
 
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from phonenumber_field.modelfields import PhoneNumberField
+#from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User as AuthUser
 # import datetime
 # from datetime import DateTimeField
@@ -21,4 +21,4 @@ class Stocks(TimeStampedModel):
 class KeyUserData(TimeStampedModel):
 	user = models.ForeignKey(AuthUser, null = True)
 	zip_code = models.CharField(max_length = 6)
-	phone_number = PhoneNumberField()
+	phone_number = models.CharField(max_length = 10)
