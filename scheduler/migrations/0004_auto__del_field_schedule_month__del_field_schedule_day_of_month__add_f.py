@@ -14,8 +14,8 @@ class Migration(SchemaMigration):
         # Deleting field 'Schedule.day_of_month'
         db.delete_column(u'scheduler_schedule', 'day_of_month')
 
-        # Adding field 'Schedule.message_type'
-        db.add_column(u'scheduler_schedule', 'message_type',
+        # Adding field 'Schedule.type'
+        db.add_column(u'scheduler_schedule', 'type',
                       self.gf('django.db.models.fields.CharField')(default='Custom', max_length=15),
                       keep_default=False)
 
@@ -24,7 +24,7 @@ class Migration(SchemaMigration):
         db.alter_column(u'scheduler_schedule', 'day_of_week', self.gf('django.db.models.fields.CharField')(max_length=10, null=True))
 
         # Changing field 'Schedule.message'
-        db.alter_column(u'scheduler_schedule', 'message', self.gf('django.db.models.fields.TextField')(max_length=160, null=True))
+        db.alter_column(u'scheduler_schedule', 'message', self.gf('django.db.models.fields.TextField')(max_length=150, null=True))
 
     def backwards(self, orm):
         # Adding field 'Schedule.month'
@@ -37,8 +37,8 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.IntegerField')(default=1, null=True),
                       keep_default=False)
 
-        # Deleting field 'Schedule.message_type'
-        db.delete_column(u'scheduler_schedule', 'message_type')
+        # Deleting field 'Schedule.type'
+        db.delete_column(u'scheduler_schedule', 'type')
 
 
         # Changing field 'Schedule.day_of_week'
@@ -91,11 +91,11 @@ class Migration(SchemaMigration):
             'frequency': ('django.db.models.fields.CharField', [], {'default': "'ONE_OFF'", 'max_length': '10'}),
             'hour': ('django.db.models.fields.IntegerField', [], {'default': '12'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'message': ('django.db.models.fields.TextField', [], {'default': "'None'", 'max_length': '160', 'null': 'True', 'blank': 'True'}),
-            'message_type': ('django.db.models.fields.CharField', [], {'default': "'Custom'", 'max_length': '15'}),
+            'message': ('django.db.models.fields.TextField', [], {'default': "''", 'max_length': '150', 'null': 'True', 'blank': 'True'}),
             'minute': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'start_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.date.today'}),
+            'type': ('django.db.models.fields.CharField', [], {'default': "'Custom'", 'max_length': '15'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
