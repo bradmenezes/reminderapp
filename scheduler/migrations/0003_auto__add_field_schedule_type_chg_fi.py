@@ -8,8 +8,8 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Schedule.message_type'
-        db.delete_column(u'scheduler_schedule', 'message_type')
+        # # Deleting field 'Schedule.message_type'
+        # db.delete_column(u'scheduler_schedule', 'message_type')
 
         # Adding field 'Schedule.type'
         db.add_column(u'scheduler_schedule', 'type',
@@ -29,8 +29,8 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.CharField')(default='Custom', max_length=20),
                       keep_default=False)
 
-        # Deleting field 'Schedule.type'
-        db.delete_column(u'scheduler_schedule', 'type')
+        # # Deleting field 'Schedule.type'
+        # db.delete_column(u'scheduler_schedule', 'type')
 
 
         # Changing field 'Schedule.day_of_week'
