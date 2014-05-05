@@ -45,10 +45,14 @@ def edit_user_data(request):
 		form = KeyUserDataForm(request.POST or None)
 
 	if request.method == 'POST':
+		print 'hey'
 		if form.is_valid():
 			new_user_data = form.save(commit = False)
 			new_user_data.user = request.user
+			
+			print new_user_data.phone_number
 			new_user_data.phone_number = '+1' + str(new_user_data.phone_number)
+			print new_user_data.phone_number
 			new_user_data.save()
 			return HttpResponseRedirect ('/')
 	

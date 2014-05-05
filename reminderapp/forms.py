@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from reminderapp.models import *
 
 class KeyUserDataForm(ModelForm):
-	zip_code = forms.CharField(max_length=6, min_length=6)
+	zip_code = forms.CharField(max_length=5, min_length=5)
 	phone_number = forms.CharField(max_length=10, min_length=10)
 	class Meta:
 		model = KeyUserData
