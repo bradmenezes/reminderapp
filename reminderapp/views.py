@@ -134,12 +134,13 @@ def getting_stocks(request, stocks_list):
 	print message
 	return message
 
-def get_weather(request, zip_code):
-    #import pywapi
+def get_weather(request):
+    import pywapi
     today = datetime.date.today()
-    
+    user_zip_code = str(KeyUserData.objects.all().get(user = request.user).zip_code)
     #Get weather from Yahoo Weather API
-    #weather = pywapi.get_weather_from_yahoo(zip_code)
+
+    weather = pywapi.get_weather_from_yahoo(user_zip_code)
 
     #Grab the temperature, high, low, dsescription from the response
     temperature = weather['condition']['temp']
@@ -149,7 +150,9 @@ def get_weather(request, zip_code):
     
     #Save the SMS text as a string
     text = str(today) + '\n \n' + str(temperature) + ' and ' + str(description) + '\nfrom ' + str(high) + ' to ' + str(low) + '\n'
-    return(text)
+    phone_number = '+14155279628'
+    phone_sms(text, phone_number)
+    return HttpResponseRedirect('/')
 
 @login_required (login_url = '/login')
 def send_message(request):
@@ -185,19 +188,4 @@ def phone_sms(message, phone_number):
         to=phone_number,
         from_="+16502674790")
 
-def test(user, message, phone_number):
-
-	print 'HEY I"m In!'
-	latest_user_stocks_list = Stocks.objects.all().get(user = user)
-	
-	for stock in latest_user_stocks_list:
-			stock_price = round(float(ystockquote.get_price(stock.stock)),2)
-			stock_symbol = (stock.stock).upper()
-			message += str(stock_symbol) + str(stock.price)
-			
-			if len(message) >= 150:
-				phone_sms(message, phone_number)
-				message = ''
-
-	phone_sms(message, phone_number)
 
