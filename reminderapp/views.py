@@ -134,25 +134,25 @@ def getting_stocks(request, stocks_list):
 	print message
 	return message
 
-def get_weather(request):
-    import pywapi
-    today = datetime.date.today()
-    user_zip_code = str(KeyUserData.objects.all().get(user = request.user).zip_code)
-    #Get weather from Yahoo Weather API
+# def get_weather(request):
+#     import pywapi
+#     today = datetime.date.today()
+#     user_zip_code = str(KeyUserData.objects.all().get(user = request.user).zip_code)
+#     #Get weather from Yahoo Weather API
 
-    weather = pywapi.get_weather_from_yahoo(user_zip_code)
+#     weather = pywapi.get_weather_from_yahoo(user_zip_code)
 
-    #Grab the temperature, high, low, dsescription from the response
-    temperature = weather['condition']['temp']
-    high = weather['forecasts'][0]['high']
-    low = weather['forecasts'][0]['low']
-    description = weather['forecasts'][0]['text']
+#     #Grab the temperature, high, low, dsescription from the response
+#     temperature = weather['condition']['temp']
+#     high = weather['forecasts'][0]['high']
+#     low = weather['forecasts'][0]['low']
+#     description = weather['forecasts'][0]['text']
     
-    #Save the SMS text as a string
-    text = str(today) + '\n \n' + str(temperature) + ' and ' + str(description) + '\nfrom ' + str(high) + ' to ' + str(low) + '\n'
-    phone_number = '+14155279628'
-    phone_sms(text, phone_number)
-    return HttpResponseRedirect('/')
+#     #Save the SMS text as a string
+#     text = str(today) + '\n \n' + str(temperature) + ' and ' + str(description) + '\nfrom ' + str(high) + ' to ' + str(low) + '\n'
+#     phone_number = '+14155279628'
+#     phone_sms(text, phone_number)
+#     return HttpResponseRedirect('/')
 
 @login_required (login_url = '/login')
 def send_message(request):

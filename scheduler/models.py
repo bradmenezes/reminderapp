@@ -51,7 +51,7 @@ class Schedule(TimeStampedModel):
 	MESSSAGE_CHOICES = (
 		('Custom', 'Custom'),
 		('Stocks', 'Stocks'),
-		('Weather', 'Weather'),
+		# ('Weather', 'Weather'),
 	)
 
 	#need to make changes for heroku...
