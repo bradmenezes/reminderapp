@@ -164,9 +164,4 @@ def send_stocks_sms(user, phone_number):
 	except Stocks.DoesNotExist:
 		print 'hey'
 
-# def send_weather_sms(user, phone_number):
-# 	try:
-# 		user_zip_code = KeyUserData.objects.all().get(user = user)
 
-# 	except:
-		

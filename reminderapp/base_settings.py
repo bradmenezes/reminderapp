@@ -108,7 +108,6 @@ INSTALLED_APPS = (
     'scheduler',
     'datetime',
     'south',
-    'pywapi',
 )
 
 EMAIL_USE_TLS = True
