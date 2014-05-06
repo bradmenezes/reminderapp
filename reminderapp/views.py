@@ -39,7 +39,9 @@ def edit_user_data(request):
 	
 	try:
 		user_data_to_edit = KeyUserData.objects.get(user = request.user)
+		print user_data_to_edit.phone_number
 		user_data_to_edit.phone_number = user_data_to_edit.phone_number.replace("+1", "") 
+		print user_data_to_edit.phone_number
 		form = KeyUserDataForm(request.POST or None, instance = user_data_to_edit)
 	except KeyUserData.DoesNotExist:
 		form = KeyUserDataForm(request.POST or None)

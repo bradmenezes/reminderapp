@@ -16,7 +16,7 @@ class TimeStampedModel(models.Model):
 
 class Stocks(TimeStampedModel):
 	user = models.ForeignKey(AuthUser)
-	stock = models.CharField(max_length = 4)
+	stock = models.CharField(max_length = 5)
 
 class KeyUserData(TimeStampedModel):
 	user = models.ForeignKey(AuthUser, null = True)
