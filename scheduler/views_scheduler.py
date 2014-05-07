@@ -72,11 +72,17 @@ def delete_schedule(request, schedule_id):
 @login_required(login_url = '/login')
 def sms_schedule(request, schedule_id):
 	phone_number = str(KeyUserData.objects.all().get(user = request.user).phone_number)
-	message = str(Schedule.objects.get(pk = schedule_id).message)
+	
+	schedule = Schedule.objects.get(pk = schedule_id)
+	message = schedule.message
+	schedule_type = schedule.type 
 
-	phone_sms(message, phone_number)
+	if schedule_type == 'Stocks':
+		send_stocks_sms(request.user, phone_number)
+	else:
+		phone_sms(message, phone_number)
+	
 	return HttpResponseRedirect('/')
-
 
 def email_schedule(request, schedule_id):
 	message = str(Schedule.objects.get(pk = schedule_id).message)
