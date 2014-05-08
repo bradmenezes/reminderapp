@@ -37,6 +37,10 @@ def set_schedule(request):
 						new_schedule.day_of_week = new_schedule.start_date.ctime().lower().partition(' ')[0]
 					else: 
 						new_schedule.day_of_week = frequency_to_day[key]
+			print new_schedule.message
+			if new_schedule.type == 'Stocks':
+				new_schedule.message = None
+			print new_schedule.message
 
 			new_schedule.save()
 			return HttpResponseRedirect('/set_schedule')

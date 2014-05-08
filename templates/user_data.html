@@ -2,7 +2,34 @@
 
 {% block content %}
 
-<div class = 'col-xs-12 left-col'>
+<div class = 'col-md-4'>
+
+	<h3>Add ZIP and Phone Number</h3>
+    
+    <form class = "form" action="" method="post">
+
+    <div class = 'signup-form'>
+        <label for = "id_zip_code">ZIP Code </label>  
+        <input class="id_zip_code form-control" maxlength="5" name="zip_code" type="text" value = {{form.zip_code.value}}>
+    </div>
+
+    <div class = 'signup-form'>
+        <label for = "id_phone_number" value = {form.phone_number}>Phone Number </label>
+        <input class="id_phone_number form-control" maxlength="10" name="phone_number" type="text" value = {{form.phone_number.value}}>
+    </div>
+
+    <div>
+    
+    {% csrf_token %}
+    <button class="btn btn-lg btn-primary btn-block btn-auth" type="submit">Save</button>
+	</div>
+
+	</form>
+</div> <!-- col-md-4 -->
+
+{% endblock %}
+
+<div class = 'col-md-12 left-col'>
 
 	<h3>Add ZIP Code and Phone Number</h3>
 
@@ -14,6 +41,9 @@
 	</table>
 		<button value = "Save" type="submit button" class="btn btn-primary submit-button left-col-full-width">Save</button> 
 	</form>
+
+	
+
 
 	<!-- <form class = "form-inline" action="" method="post">
 		{% csrf_token %}
@@ -32,5 +62,3 @@
 		<button value = "Save" type="submit button" class="btn btn-primary submit-button left-col-full-width">Save</button>
 	</form> -->
 
-<div>
-{% endblock %}
