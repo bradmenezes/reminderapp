@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^mobile/$', scheduler.mobile_instructions),
     url(r'^mobile_sms/$', scheduler.mobile_sms),
     url(r'^pause_schedule/(\d{1,6})/$', scheduler.pause_schedule),
-
+    url(r'^resume_schedule/(\d{1,6})/$', scheduler.resume_schedule),
 )
 
 

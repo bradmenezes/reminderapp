@@ -23,7 +23,11 @@
 				<td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
 				<td class = 'link-small'><a href="/delete_schedule/{{ schedule.id }}">Remove</a></td>
 				<td class = 'link-small'><a href="/edit_schedule/{{ schedule.id }}">Edit</td>
-				<td class = 'link-small'><a href="/pause_schedule/{{ schedule.id }}">Pause Schedule</td>
+				{% if schedule.paused_at = None %}
+					<td class = 'link-small'><a href="/pause_schedule/{{ schedule.id }}">Pause Schedule</td>
+				{% else%}
+					<td class = 'link-small'><a href="/resume_schedule/{{ schedule.id }}">Resume Schedule</td>
+				{% endif %}
 			</tr>
 		
 		{% endif %}
