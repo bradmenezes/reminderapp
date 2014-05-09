@@ -49,7 +49,7 @@ class Schedule(TimeStampedModel):
 	)
 
 	MESSSAGE_CHOICES = (
-		('Custom', 'Custom'),
+		('Custm', 'Custom'),
 		('Stocks', 'Stocks'),
 		# ('Weather', 'Weather'),
 	)
@@ -64,8 +64,6 @@ class Schedule(TimeStampedModel):
 	hour = models.IntegerField(choices = HOUR_CHOICES, default= 12)
 	minute = models.IntegerField(choices = [(i,i) for i in range(60)], default = 0)
 	
-
-
 	#blank = True means in the form you don't necessary need this field. 
 
 
