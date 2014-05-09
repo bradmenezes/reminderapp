@@ -175,3 +175,15 @@ def send_stocks_sms(user, phone_number):
 		print 'hey'
 
 
+def pause_schedule(request, schedule_id):
+	schedule_to_pause = Schedule.objects.all().get(pk= schedule_id)
+
+	paused_time = datetime.datetime.now()
+	schedule_to_pause.paused_at = paused_time
+	schedule_to_pause.save()
+	return HttpResponseRedirect('/')
+
+	
+
+
+

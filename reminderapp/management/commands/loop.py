@@ -15,15 +15,16 @@ logging.basicConfig()
 
 class Command(BaseCommand):
     
-    def start_scheduled_job(self, sched, user, message_type, user_message, phone_number, day_of_week, hour, minute, month, year, day_of_month, frequency, start_date):
+    def start_scheduled_job(self, sched, user, paused_at, message_type, user_message, phone_number, day_of_week, hour, minute, month, year, day_of_month, frequency, start_date):
         
         def send_message():
             print 'AFTER' + str(user_message) + str(phone_number)
             
-            if message_type == 'Stocks':
-                send_stocks_sms(user, phone_number)
-            else: 
-                phone_sms(user_message, phone_number)
+            if paused_at != None:
+                if message_type == 'Stocks':
+                    send_stocks_sms(user, phone_number)
+                else: 
+                    phone_sms(user_message, phone_number)
                 
         #Depending on Frequency, set cron job for APScheduler 
         #print user_message
@@ -75,7 +76,8 @@ class Command(BaseCommand):
                     year = schedule.start_date.year
                     day_of_month = schedule.start_date.day
                     frequency = schedule.frequency
-                    self.start_scheduled_job(sched, user, message_type, user_message, phone_number, day_of_week, hour, minute, month, year, day_of_month, frequency, start_date) 
+                    paused_at = schedule.paused_at
+                    self.start_scheduled_job(sched, user, paused_at, message_type, user_message, phone_number, day_of_week, hour, minute, month, year, day_of_month, frequency, start_date) 
             #If we don't have their Phone number or Schedule then Skip!
             except KeyUserData.DoesNotExist or Schedule.DoesNotExist:
                 pass
