@@ -10,12 +10,12 @@
 
     <div class = 'signup-form'>
         <label for = "id_zip_code">ZIP Code </label>  
-        <input class="id_zip_code form-control" maxlength="5" name="zip_code" type="text" value = {{form.zip_code.value}}>
+        <input class="id_zip_code form-control" maxlength="5" name="zip_code" type="text" value = {{form.zip_code.value|default_if_none:""}}>
     </div>
 
     <div class = 'signup-form'>
         <label for = "id_phone_number" value = {form.phone_number}>Phone Number </label>
-        <input class="id_phone_number form-control" maxlength="10" name="phone_number" type="text" value = {{form.phone_number.value}}>
+        <input class="id_phone_number form-control" maxlength="10" name="phone_number" type="text" value = {{form.phone_number.value|default_if_none:""}}>
     </div>
 
     <div>
@@ -28,6 +28,28 @@
 </div> <!-- col-md-4 -->
 
 {% endblock %}
+
+<div class = 'col-md-4'>
+	<h3>Add ZIP and Phone Number</h3>
+	<form class = "form" action="" method="post">
+		<div class = 'signup-form'>
+        	<label for = "id_zip_code">ZIP Code </label>  
+        		<ul>
+        			<li class = 'form-control'>{{form.zip_code}}</li>
+        		
+        		{{ form.zip_code.errors }}
+    	</div>
+
+
+		{% csrf_token %}
+    	<button class="btn btn-lg btn-primary btn-block btn-auth" type="submit">Save</button>
+	</form>
+
+</div> <!-- col-md-4 -->
+
+
+<!--- BS BELOW -->
+
 
 <div class = 'col-md-12 left-col'>
 
