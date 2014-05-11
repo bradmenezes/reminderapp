@@ -4,7 +4,7 @@
 
 
 <div class = 'col-md-4'>
-    <h2>Sign up for ReminderApp</h2>
+    <h2>Sign up for MemorySMS</h2>
 
     {% if errors %}
         {% for error in errors %}
@@ -16,16 +16,20 @@
     <div class = 'signup-form'>
         <label for = "Username">Username </label>  
         <input id="id_username" class = 'form-control id_username'maxlength="30" name="username" type="text">
+        {{form.username.errors}}
+
     </div>
     
     <div class = 'signup-form'>
         <label for = "id_password1">Password</label>  
         <input id="id_password1" class = 'form-control id_password'name="password1" type="password">
+        {{form.password1.errors}}
     </div>   
 
     <div class = 'signup-form'>
         <label for = "id_password2">Confirm Password</label>  
         <input id="id_password2" class = 'form-control id_password'name="password2" type="password">
+        {{form.password2.errors}}
     </div>  
 
     {% csrf_token %}
@@ -35,6 +39,31 @@
 	<div class = 'under-button-txt'>Already have an account?
     <a href="/login"> Log in</a>
 	</div>
+
+</div>
+
+<!-- <div class = 'col-md-2'>
+</div>
+
+<div class = 'col-md-6'>
+
+<div class = "sms-to-try">
+        <h3>Set up scheduled or one-off reminders and never forget!</h3>
+            <ul>
+              <li>Real-time Stock prices</li>
+              <li>Doctor's Appointments</li>
+              <li>Gym Days</li>
+              <li>Due Dates</li>
+              <li>Medication</li>
+              <li>Laundry</li>
+              <li>Friend's Birthdays</li>
+              <li>Anniverssaries</li>
+              <li>Tasks with deadlines</li>
+              <li>and more!</li>
+            </ul>
+</div> -->
+
+
 {% endblock %}
 
 <!-- <form class = "form-inline" action="" method="post">

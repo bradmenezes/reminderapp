@@ -84,13 +84,13 @@
         </table>
 
         <p></p>
+        
         <a href="/set_schedule" class = "link-small">Edit Schedules</a>
         
         <h3>Paused Schedules</h3>
 
         <table>
           {% for frequency in used_frequency %}
-            <tr><td><h5> {{frequency}}</h5> <td></tr>
             {% for schedule in latest_schedule %}
               {% if frequency == schedule.frequency and schedule.paused_at != None %}
                 <tr>

@@ -11,11 +11,13 @@
     <div class = 'signup-form'>
         <label for = "id_zip_code">ZIP Code </label>  
         <input class="id_zip_code form-control" maxlength="5" name="zip_code" type="text" value = {{form.zip_code.value|default_if_none:""}}>
+   		{{ form.zip_code.errors }}
     </div>
 
     <div class = 'signup-form'>
         <label for = "id_phone_number" value = {form.phone_number}>Phone Number </label>
         <input class="id_phone_number form-control" maxlength="10" name="phone_number" type="text" value = {{form.phone_number.value|default_if_none:""}}>
+    	{{ form.phone_number.errors }}
     </div>
 
     <div>
@@ -37,7 +39,7 @@
         		<ul>
         			<li class = 'form-control'>{{form.zip_code}}</li>
         		
-        		{{ form.zip_code.errors }}
+        		
     	</div>
 
 

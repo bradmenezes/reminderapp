@@ -3,23 +3,19 @@
 {% block content %}
 
 <div class = 'col-md-4'>
-    <h2>Log in to ReminderApp</h2>
-
-    {% if errors %}
-        {% for error in errors %}
-            <p> {{ error }}<p/>
-        {% endfor %}
-    {% endif %}
+    <h2>Log in to MemorySMS</h2>
 
     <form class = "form" action="" method="post">
     <div class = 'signup-form'>
         <label for = "user">Username </label>  
         <input class = "form-control id_username" type="text" name="email" label = "Email">
+        {{form.username.errors}}
     </div>
     
     <div class = 'signup-form'>
         <label for = "Password">Password</label>  
         <input class = "form-control id_password" type="password" name="password" label = "Password" id = "password">
+        {{form.password.errors}}
     </div>   
     <div>
 

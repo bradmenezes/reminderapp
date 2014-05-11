@@ -3,42 +3,36 @@
 {% block content %}
 	
 <div class = 'col-md-3 left-col'>
-    <h4>Add Stock Symbol</h4>
+    <h4>Add Stocks</h4>
     
-    <form class = "form-inline" action="" method="post">
-  		{% csrf_token %}
-  		{{ form.as_table }}
-  		<button type="submit button" class="btn btn-primary  left-col-full-width">Add stock</button> 
-    </form>
-    
-    <div>
-      {% if latest_user_stocks_list %}
-        <h4>Your Stocks </h4>
-        <table>
-          {% for user_stocks in latest_user_stocks_list %} 
-                <tr>
-                  <td class = 'list-title'>{{ user_stocks.stock }}</td>
-                  <td class = 'stock-price'>${{user_stocks.price}}</td> 
-                  <td> <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a></td>
-                </tr>
-          {% endfor %}    
-        </table>
-      {% endif %}
-    </div> 
-</div> <!-- left-col-->
+    <form class = "form" action="" method="post">
+      
+      <div class = 'signup-form'>
+          <label for = "id_stock">Stock Ticker Symbol </label>  
+          <input class="id_stock form-control" maxlength="5" name="stock" type="text">
+          {{form.stock.errors}}
+      </div>
+      
+      {% csrf_token %}
+      <button class="btn btn-lg btn-primary btn-block btn-auth" type="submit">Add Stock</button>
+      
+
+      <div>
+        {% if latest_user_stocks_list %}
+          <h4>Your Stocks </h4>
+          <table>
+            {% for user_stocks in latest_user_stocks_list %} 
+                  <tr>
+                    <td class = 'list-title'>{{ user_stocks.stock }}</td>
+                    <td class = 'stock-price'>${{user_stocks.price}}</td> 
+                    <td> <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a></td>
+                  </tr>
+            {% endfor %}    
+          </table>
+        {% endif %}
+      </div> 
+  </form>
+
+</div> <!-- col-md-3 -->
 
 {% endblock %}
-
-<!--
-
-  <div>
-                <span class = 'list-title'>{{ user_stocks.stock }}</span> 
-                  <span> ${{user_stocks.price}} </span>
-                  <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a>
-              </div>
-
-                  <table>
-                <ul><span class = 'list-title'></span> 
-                  <span>  </span>
-                  <a href="/delete_stocks/{{ user_stocks.id }}/">Remove</a><ul>
-
