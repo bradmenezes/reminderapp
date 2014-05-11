@@ -19,8 +19,9 @@ class Command(BaseCommand):
         
         def send_message():
             print 'AFTER' + str(user_message) + str(phone_number)
-            
-            if paused_at != None:
+            print paused_at
+
+            if paused_at == None:
                 if message_type == 'Stocks':
                     send_stocks_sms(user, phone_number)
                 else: 

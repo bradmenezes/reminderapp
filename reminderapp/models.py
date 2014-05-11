@@ -19,6 +19,6 @@ class Stocks(TimeStampedModel):
 	stock = models.CharField(max_length = 5)
 
 class KeyUserData(TimeStampedModel):
-	user = models.ForeignKey(AuthUser, null = True)
-	zip_code = models.CharField(max_length = 6)
-	phone_number = models.CharField(max_length = 10)
+	user = models.ForeignKey(AuthUser)
+	zip_code = models.CharField(max_length = 6, default = '')
+	phone_number = models.CharField(max_length = 10, default = '')
