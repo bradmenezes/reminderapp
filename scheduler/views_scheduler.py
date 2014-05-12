@@ -189,7 +189,12 @@ def resume_schedule(request, schedule_id):
 	schedule_to_pause.paused_at = None
 	schedule_to_pause.save()
 	
-	return HttpResponseRedirect('/set_schedule')
+	return HttpResponseRedirect('/')
+
+
+#for pause and resume all - see if you can change functions
+#to ignore the request
+
 
 
 

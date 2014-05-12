@@ -61,7 +61,7 @@
 
     <div class = 'col-md-9 right-column'>
       {% if latest_schedule %}
-        <h3>Current Messages on Schedule</h3>
+        <span><h3>Current Messages on Schedule</h3>
 
         <table>
           {% for frequency in used_frequency %}
@@ -70,10 +70,12 @@
               {% if frequency == schedule.frequency and schedule.paused_at == None %}
                 <tr>
                   <td class = 'message-left-col' >
-                    <span>'{{schedule.message }}'</span>
-                    <span> at {{schedule.hour}}:</span>
-                    <span>{{schedule.minute}}</span>
-                    <span>starting  on {{schedule.start_date}}</span>
+                    {% if schedule.type == 'Stocks' %}
+                    <span>Your Stock Prices</span>
+                    {% else %}
+                    <span class = 'italic-message'>'{{schedule.message }}'</span>
+                    {% endif %}
+                    <span class = 'small-text'>   at {{schedule.hour}}:{{schedule.minute}} starting  on {{schedule.start_date}}</span>
                   </td>
                   <td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
                 </tr>
@@ -95,18 +97,20 @@
               {% if frequency == schedule.frequency and schedule.paused_at != None %}
                 <tr>
                   <td class = 'message-left-col' >
-                    <span>'{{schedule.message }}'</span>
-                    <span> at {{schedule.hour}}:</span>
-                    <span>{{schedule.minute}}</span>
-                    <span>starting  on {{schedule.start_date}}</span>
+                    <span class = 'italic-message'>'{{schedule.message }}'</span>
+                    <span class = 'small-text'>   at {{schedule.hour}}:{{schedule.minute}} starting  on {{schedule.start_date}}</span>
                   </td>
-                  <td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
+                  <td class = 'link-small'><a href="/resume_schedule/{{ schedule.id }}">Resume Schedule</a></td>
                 </tr>
               
               {% endif %} <!--if frequency == -->
             {% endfor %} <!--for schedule  --> 
           {% endfor %} <!--for frequency  -->
         </table>
+
+        <p></p>
+        
+        <a href="/set_schedule" class = "link-small">Edit Schedules</a>
 
       {% else %}
       
