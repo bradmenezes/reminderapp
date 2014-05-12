@@ -15,11 +15,13 @@
 		
 			<tr>
 				<td class = 'message-left-col' >
-					<span>'{{schedule.message }}'</span>
-					<span> at {{schedule.hour}}:</span>
-					<span>{{schedule.minute}}</span>
-					<span>starting  on {{schedule.start_date}}</span>
-				</td>
+                    {% if schedule.type == 'Stocks' %}
+                    <span>Your Stock Prices</span>
+                    {% else %}
+                    <span class = 'italic-message'>'{{schedule.message }}'</span>
+                    {% endif %}
+                    <span class = 'small-text'>   at {{schedule.hour}}:{{schedule.minute}} starting  on {{schedule.start_date}}</span>
+                  </td>
 				<td class = 'link-small'><a href="/sms_schedule/{{ schedule.id }}">Send Test</a></td>
 				<td class = 'link-small'><a href="/delete_schedule/{{ schedule.id }}">Remove</a></td>
 				<td class = 'link-small'><a href="/edit_schedule/{{ schedule.id }}">Edit</td>
