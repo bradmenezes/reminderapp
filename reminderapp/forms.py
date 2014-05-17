@@ -10,7 +10,6 @@ class KeyUserDataForm(ModelForm):
 		exclude = ('user')
 
 class StocksForm(ModelForm):
-	
 	class Meta:
 		model = Stocks
 		exclude = ('user')

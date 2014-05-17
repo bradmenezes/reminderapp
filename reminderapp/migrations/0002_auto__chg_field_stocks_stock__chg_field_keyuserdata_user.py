@@ -10,12 +10,18 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'Stocks.stock'
-        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=5))
+        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=6))
+
+        # Changing field 'KeyUserData.user'
+        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['auth.User']))
 
     def backwards(self, orm):
 
         # Changing field 'Stocks.stock'
         db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=4))
+
+        # Changing field 'KeyUserData.user'
+        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True))
 
     models = {
         u'auth.group': {
@@ -59,16 +65,16 @@ class Migration(SchemaMigration):
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'phone_number': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True'}),
-            'zip_code': ('django.db.models.fields.CharField', [], {'max_length': '6'})
+            'phone_number': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '10'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'zip_code': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '6'})
         },
         u'reminderapp.stocks': {
             'Meta': {'object_name': 'Stocks'},
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'stock': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'stock': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
