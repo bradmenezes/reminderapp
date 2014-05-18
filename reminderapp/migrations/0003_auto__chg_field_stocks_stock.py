@@ -1,4 +1,3 @@
-#0002_auto__chg_field_stocks_stock__chg_field_keyuserdata_user.py
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
@@ -11,18 +10,12 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'Stocks.stock'
-        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=6))
-
-        # Changing field 'KeyUserData.user'
-        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['auth.User']))
+        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=7))
 
     def backwards(self, orm):
 
         # Changing field 'Stocks.stock'
-        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=4))
-
-        # Changing field 'KeyUserData.user'
-        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True))
+        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=6))
 
     models = {
         u'auth.group': {
@@ -75,7 +68,7 @@ class Migration(SchemaMigration):
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'stock': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
+            'stock': ('django.db.models.fields.CharField', [], {'max_length': '7'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }

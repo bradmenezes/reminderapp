@@ -1,3 +1,5 @@
+#0001_initial.py
+
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
@@ -8,36 +10,20 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        print 'fake line'
-    #     # # Adding model 'Stocks'
-    #     # db.create_table(u'reminderapp_stocks', (
-    #     #     (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-    #     #     ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-    #     #     ('modified_date', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-    #     #     ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-    #     #     ('stock', self.gf('django.db.models.fields.CharField')(max_length=4)),
-    #     # ))
-    #     # db.send_create_signal(u'reminderapp', ['Stocks'])
 
-    #     # # Adding model 'KeyUserData'
-    #     # db.create_table(u'reminderapp_keyuserdata', (
-    #     #     (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-    #     #     ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-    #     #     ('modified_date', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-    #     #     ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True)),
-    #     #     ('zip_code', self.gf('django.db.models.fields.CharField')(max_length=6)),
-    #     #     ('phone_number', self.gf('django.db.models.fields.CharField')(max_length=10)),
-    #     # ))
-    #     # db.send_create_signal(u'reminderapp', ['KeyUserData'])
+        # Changing field 'Stocks.stock'
+        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=6))
 
+        # Changing field 'KeyUserData.user'
+        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['auth.User']))
 
     def backwards(self, orm):
-        # Deleting model 'Stocks'
-        db.delete_table(u'reminderapp_stocks')
 
-        # Deleting model 'KeyUserData'
-        db.delete_table(u'reminderapp_keyuserdata')
+        # Changing field 'Stocks.stock'
+        db.alter_column(u'reminderapp_stocks', 'stock', self.gf('django.db.models.fields.CharField')(max_length=4))
 
+        # Changing field 'KeyUserData.user'
+        db.alter_column(u'reminderapp_keyuserdata', 'user_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True))
 
     models = {
         u'auth.group': {
@@ -81,16 +67,16 @@ class Migration(SchemaMigration):
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'phone_number': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True'}),
-            'zip_code': ('django.db.models.fields.CharField', [], {'max_length': '6'})
+            'phone_number': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '10'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'zip_code': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '6'})
         },
         u'reminderapp.stocks': {
             'Meta': {'object_name': 'Stocks'},
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'stock': ('django.db.models.fields.CharField', [], {'max_length': '4'}),
+            'stock': ('django.db.models.fields.CharField', [], {'max_length': '6'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
