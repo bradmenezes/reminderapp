@@ -11,6 +11,8 @@ class Migration(SchemaMigration):
         # # Deleting field 'Schedule.message_type'
         # db.delete_column(u'scheduler_schedule', 'message_type')
 
+        db.delete_column(u'scheduler_schedule', 'type')
+
         # Adding field 'Schedule.type'
         db.add_column(u'scheduler_schedule', 'type',
                       self.gf('django.db.models.fields.CharField')(default='Custom', max_length=15),
