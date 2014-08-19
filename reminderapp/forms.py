@@ -7,9 +7,9 @@ class KeyUserDataForm(ModelForm):
 	phone_number = forms.CharField(max_length=10, min_length=10)
 	class Meta:
 		model = KeyUserData
-		exclude = ('user')
+		exclude = ('user',)
 
 class StocksForm(ModelForm):
 	class Meta:
 		model = Stocks
-		exclude = ('user')
+		exclude = ('user',)
