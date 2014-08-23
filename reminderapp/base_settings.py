@@ -113,7 +113,7 @@ INSTALLED_APPS = (
     'tastypie',
     'debug_toolbar',
 )
-
+#test
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 EMAIL_USE_TLS = True

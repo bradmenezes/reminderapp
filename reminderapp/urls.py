@@ -46,7 +46,8 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
 
     #url(r'^__debug__/', include(debug_toolbar.urls)),
-
+    # test
+    
 
 )
 

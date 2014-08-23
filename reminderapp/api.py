@@ -31,3 +31,6 @@ class ScheduleResource(ModelResource):
 
         def determine_format(self, request):
 			return 'application/json'	
+
+
+		# this is a test :)
