@@ -10,14 +10,12 @@ gnureadline==6.3.3
 ipython==2.2.0
 macholib==1.5
 modulegraph==0.10.1
-numpy==1.6.2
 psycopg2==2.5.3
 py2app==0.7.1
 pyOpenSSL==0.13
 python-dateutil==1.5
 python-mimeparse==0.1.4
 pytz==2012d
-scipy==0.11.0
 sqlparse==0.1.11
 static3==0.5.1
 virtualenv==1.11.6
