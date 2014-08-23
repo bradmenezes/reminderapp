@@ -111,7 +111,6 @@ INSTALLED_APPS = (
     'datetime',
     'south',
     'tastypie',
-    'debug_toolbar',
 )
 #test
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
