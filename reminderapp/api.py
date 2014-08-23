@@ -18,6 +18,9 @@ class UserResource(ModelResource):
             'username': ALL,
         }
 
+        def determine_format(self, request):
+			return 'application/json'	
+
 class ScheduleResource(ModelResource):
 	user = fields.ForeignKey(UserResource, 'user')
 
