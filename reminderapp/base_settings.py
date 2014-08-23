@@ -78,11 +78,13 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -108,7 +110,11 @@ INSTALLED_APPS = (
     'scheduler',
     'datetime',
     'south',
+    'tastypie',
+    'debug_toolbar',
 )
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

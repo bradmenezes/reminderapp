@@ -7,9 +7,17 @@ from authentication import views_authentication as auth
 from django.contrib.auth.views import login, logout
 from scheduler import views_scheduler as scheduler
 
+from tastypie.api import Api
+from reminderapp.api import *
+
+
+v1_api = Api(api_name='v1')
+v1_api.register(UserResource())
+v1_api.register(ScheduleResource())
+
+schedule_resource = ScheduleResource()
 
 urlpatterns = patterns('',
-
     url(r'^$', views.view_user_info), 
     url(r'^admin/', include(admin.site.urls)),
     
@@ -32,7 +40,21 @@ urlpatterns = patterns('',
     url(r'^mobile_sms/$', scheduler.mobile_sms),
     url(r'^pause_schedule/(\d{1,6})/$', scheduler.pause_schedule),
     url(r'^resume_schedule/(\d{1,6})/$', scheduler.resume_schedule),
+
+    #url(r'^blog/', include('reminderapp.urls')),
+    #url(r'^api/', include(schedule_resource.urls)),
+    url(r'^api/', include(v1_api.urls)),
+
+    #url(r'^__debug__/', include(debug_toolbar.urls)),
+
+
 )
+
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns += patterns('',
+#     url(r'^__debug__/', include(debug_toolbar.urls)),
+# )
 
 
 
