@@ -4,7 +4,6 @@ South==1.0
 Twisted==12.2.0
 altgraph==0.10.1
 bdist-mpkg==0.4.4
-bonjour-py==0.3
 dj-static==0.0.6
 django-tastypie==0.11.1
 gnureadline==6.3.3
